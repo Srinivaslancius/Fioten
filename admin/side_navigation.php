@@ -23,6 +23,7 @@
                     </div>
                 <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion">
                     <li class="no-padding active"><a class="waves-effect waves-grey active" href="dashboard.php"><i class="material-icons">settings_input_svideo</i>Dashboard</a></li>
+                    <li class="no-padding"><a class="waves-effect waves-grey active" href="site_settings.php"><i class="material-icons">settings_input_svideo</i>Site Settings</a></li>
                     <li class="no-padding">
                         <a class="collapsible-header waves-effect waves-grey"><i class="material-icons">apps</i>Users <i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                         <div class="collapsible-body">
@@ -36,7 +37,7 @@
 
                     <li class="no-padding "><a class="waves-effect waves-grey" href="categories.php"><i class="material-icons">settings_input_svideo</i>Categories</a></li>
 
-                    <li class="no-padding "><a class="waves-effect waves-grey" href="weight.php"><i class="material-icons">settings_input_svideo</i>Weight</a></li>
+                    <li class="no-padding "><a class="waves-effect waves-grey" href="content_pages.php"><i class="material-icons">settings_input_svideo</i>Content pages</a></li>
 
                     <li class="no-padding "><a class="waves-effect waves-grey" href="products.php"><i class="material-icons">settings_input_svideo</i>Products</a></li>
 

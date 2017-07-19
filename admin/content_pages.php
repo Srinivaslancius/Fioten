@@ -4,7 +4,7 @@
 
             <main class="mn-inner">
                 <div class="row">
-                    
+                   
                     <div class="col s12 m12 l12">
                         <div class="card">
                             <div class="card-content">
@@ -26,7 +26,7 @@
                                             <td><?php echo $row['title'];?></td>
                                             <td><?php echo $row['description'];?></td>
                                             <td><?php if ($row['status']==0) { echo "Active" ;} else{ echo "In Active" ;}?></td>
-                                            <td><a href="edit_content_pages.php?uid=<?php echo $row['id']; ?>">Edit</a></td>
+                                            <td><a href=" edit_content_pages.php?uid=<?php echo $row['id'];?>"><i class="material-icons dp48">edit</i></a><a href="#"><i class="material-icons dp48">pageview</i></a><a href="#"><i class="material-icons dp48">delete</i></a></td>
                                         </tr>               
                                         <?php } ?>
                                     </tbody>

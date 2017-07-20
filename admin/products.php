@@ -27,6 +27,22 @@
                                             <td><?php echo $row['price'];?></td>
                                             <td><?php echo $row['status'];?></td>
                                             <td><a href="edit_products.php?pid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a href="#"><i class="material-icons dp48">pageview</i></a><a href="#"><i class="material-icons dp48">delete</i></a></td>
+                                            <div id="myModal_<?php echo $row['id']; ?>" class="modal fade" >
+                                            <div class="modal-dialog" Style="margin-top:10%;">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h3 class="modal-title"><b>Product Information</b></h3>
+                                                    </div>
+                                                    <div class="modal-body" >
+                                                        <h5 class="modal-title-set"><b>Name :</b><?php echo $row['product_name'];?></h5>
+                                                        <h5 class="modal-title-set"><b>Price :</b><?php echo strip_tags($row['price']);?></h5>
+                                                   </div>
+                                                    <div class="modal-footer" >
+                                                          <button type="button" class="btn" data-dismiss="modal" style="background-color:#f00; color:#fff">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         </tr>               
                                         <?php } ?>
                                     </tbody>

@@ -8,6 +8,10 @@
     $id=1;
     $admin_title = $_POST['admin_title'];  
     $email = $_POST['email'];
+    $email = $_POST['email'];
+    $fb_link = $_POST['fb_link'];
+    $twitter_link = $_POST['twitter_link'];
+    $gplus_link = $_POST['gplus_link'];
     $mobile = $_POST['mobile'];
     $footer_text = $_POST['footer_text'];
     $address = $_POST['address'];
@@ -28,7 +32,7 @@
         //Send parameters for img val,tablename,clause,id,imgpath for image ubnlink from folder
 
         if (move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file)) {
-            $sql = "UPDATE `site_settings` SET admin_title = '$admin_title', email='$email', mobile='$mobile', logo = '$logo', footer_text='$footer_text', address='$address' WHERE id = '$id' ";
+            $sql = "UPDATE `site_settings` SET admin_title = '$admin_title', email='$email', fb_link='$fb_link', twitter_link='$twitter_link', gplus_link='$gplus_link', mobile='$mobile', logo = '$logo', footer_text='$footer_text', address='$address' WHERE id = '$id' ";
             if($conn->query($sql) === TRUE){
                echo "<script>alert('Data Updated Successfully');window.location.href='site_settings.php';</script>";
             } else {
@@ -39,7 +43,7 @@
             echo "Sorry, there was an error uploading your file.";
         }
     }  else {
-        $sql = "UPDATE `site_settings` SET admin_title = '$admin_title', email='$email', mobile='$mobile', footer_text='$footer_text', address='$address' WHERE id = '$id' ";
+        $sql = "UPDATE `site_settings` SET admin_title = '$admin_title', email='$email', fb_link='$fb_link', twitter_link='$twitter_link', gplus_link='$gplus_link', mobile='$mobile', footer_text='$footer_text', address='$address' WHERE id = '$id' ";
         if($conn->query($sql) === TRUE){
            echo "<script>alert('Data Updated Successfully');window.location.href='site_settings.php';</script>";
         } else {
@@ -70,6 +74,18 @@
                                 <div class="input-field col s12">
                                     <input id="title" type="text" class="validate" name="email" required value="<?php echo $getSiteSettingsData['email'];?>">
                                     <label for="title">Email</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="title" type="text" class="validate" name="fb_link" required value="<?php echo $getSiteSettingsData['fb_link'];?>">
+                                    <label for="title">Facebook link</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="title" type="text" class="validate" name="twitter_link" required value="<?php echo $getSiteSettingsData['twitter_link'];?>">
+                                    <label for="title">Twitter Link</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="title" type="text" class="validate" name="gplus_link" required value="<?php echo $getSiteSettingsData['gplus_link'];?>">
+                                    <label for="title">Google + Link</label>
                                 </div>
                                 <div class="input-field col s12">
                                     <input id="title" type="text" class="validate" name="mobile" required value="<?php echo $getSiteSettingsData['mobile'];?>">

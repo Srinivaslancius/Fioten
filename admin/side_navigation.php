@@ -43,7 +43,7 @@
 
                     <li class="no-padding <?php if($page_name == 'categories.php') { echo "active"; } ?>"><a class="waves-effect waves-grey" href="categories.php"><i class="material-icons">settings_input_svideo</i>Categories</a></li>
 
-                    <li class="no-padding <?php if($page_name == 'content_pages.php') { echo "active"; } ?>"><a class="waves-effect waves-grey" href="content_pages.php"><i class="material-icons">content_copy</i>Content pages</a></li>
+                    <li class="no-padding <?php if($page_name == 'content_pages.php') { echo "active"; } ?>"><a class="waves-effect waves-grey" href="content_pages.php"><i class="material-icons">content_copy</i>Content Pages</a></li>
 
                     <li class="no-padding <?php if($page_name == 'products.php') { echo "active"; } ?>"><a class="waves-effect waves-grey" href="products.php"><i class="material-icons">settings_input_svideo</i>Products</a></li>
 

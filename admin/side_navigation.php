@@ -47,6 +47,8 @@
 
                     <li class="no-padding <?php if($page_name == 'products.php') { echo "active"; } ?>"><a class="waves-effect waves-grey" href="products.php"><i class="material-icons">settings_input_svideo</i>Products</a></li>
 
+                    <li class="no-padding <?php if($page_name == 'customer_enqueries.php') { echo "active"; } ?>"><a class="waves-effect waves-grey" href="customer_enqueries.php"><i class="material-icons">settings_input_svideo</i>Customer Enqueries</a></li>
+
                 </ul>
                 
                 <div class="footer">

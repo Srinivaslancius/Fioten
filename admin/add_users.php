@@ -59,20 +59,16 @@ if (!isset($_POST['submit']))  {
                                     </div>
                                     <?php $getCountries = getAllDataCheckActive('lkp_countries',0); ?>
                                 <div class="input-field col s6">
-                                    <select name="user_country_id" required>
+                                    <select name="user_country_id" id="user_country_id" required onChange="getState(this.value);">
                                         <option value="">Select Country</option>
                                         <?php while($row = $getCountries->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>"><?php echo $row['country_name']; ?></option>
                                         <?php } ?>
                                     </select> 
-                                </div>
-                                <?php $getStates = getAllDataCheckActive('lkp_states',0); ?>
+                                </div>                               
                                 <div class="input-field col s6">
-                                    <select name="user_state_id" required>
-                                        <option value="">Select State</option>
-                                        <?php while($row = $getStates->fetch_assoc()) {  ?>
-                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
-                                        <?php } ?>
+                                    <select name="user_state_id" id="user_state_id" required>
+                                        <option value="">Select State</option>                                        
                                     </select> 
                                 </div>
                                 <?php $getCities = getAllDataCheckActive('lkp_cities',0); ?>
@@ -113,3 +109,15 @@ if (!isset($_POST['submit']))  {
     </main>
 
 <?php include_once 'footer.php'; ?>
+<script>
+function getState(val) { 
+    $.ajax({
+    type: "POST",
+    url: "get_state.php",
+    data:'country_id='+val,
+    success: function(data){
+        $("#user_state_id").html(data);
+    }
+    });
+}
+</script>

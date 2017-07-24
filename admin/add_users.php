@@ -58,46 +58,42 @@ if (!isset($_POST['submit']))  {
                                         <label for="user_password">User Password</label>
                                     </div>
                                     <?php $getCountries = getAllDataCheckActive('lkp_countries',0); ?>
-                                <div class="input-field col s6">
-                                    <select name="user_country_id" id="user_country_id" required onChange="getState(this.value);">
-                                        <option value="">Select Country</option>
-                                        <?php while($row = $getCountries->fetch_assoc()) {  ?>
-                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['country_name']; ?></option>
-                                        <?php } ?>
-                                    </select> 
-                                </div>                               
-                                <div class="input-field col s6">
-                                    <select name="user_state_id" id="user_state_id" required>
-                                        <option value="">Select State</option>                                        
-                                    </select> 
-                                </div>
-                                <?php $getCities = getAllDataCheckActive('lkp_cities',0); ?>
-                                <div class="input-field col s6">
-                                    <select name="user_city_id" required>
-                                        <option value="">Select City</option>
-                                        <?php while($row = $getCities->fetch_assoc()) {  ?>
-                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
-                                        <?php } ?>
-                                    </select> 
-                                </div>
-                                <div class="input-field col s6">
-                                    <select name="user_location_id" required>
-                                        <option value="" disabled selected>Choose your Location</option>
-                                        <option value="0">Active</option>
-                                        <option value="1">In Active</option>                                        
-                                    </select>                                    
-                                </div>
-                                    <div class="input-field col s12">
-                                        <textarea id="user_address" class="materialize-textarea" name="user_address" required></textarea>
-                                        <label for="user_address">User Address</label>
+                                    <div class="input-field col s6">
+                                        <select name="user_country_id" id="user_country_id" required onChange="getState(this.value);">
+                                            <option value="">Select Country</option>
+                                            <?php while($row = $getCountries->fetch_assoc()) {  ?>
+                                                <option value="<?php echo $row['id']; ?>"><?php echo $row['country_name']; ?></option>
+                                            <?php } ?>
+                                        </select> 
+                                    </div>                               
+                                    <div class="input-field col s6">
+                                        <select name="user_state_id" id="user_state_id" required onChange="getCities(this.value);">
+                                            <option value="">Select State</option>                                        
+                                        </select> 
+                                    </div>                                    
+                                    <div class="input-field col s6">
+                                        <select name="user_city_id" id="user_city_id" required>
+                                            <option value="">Select City</option>                                           
+                                        </select> 
                                     </div>
-                                   
-                                </div>
-                                <div class="row">                                            
-                                    <div class="col s12 l3">                                                
-                                        <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn blue m-b-xs">
-                                    </div>                                            
-                                </div>
+                                    <div class="input-field col s6">
+                                        <select name="user_location_id" required>
+                                            <option value="" disabled selected>Choose your Location</option>
+                                            <option value="0">Active</option>
+                                            <option value="1">In Active</option>                                        
+                                        </select>                                    
+                                    </div>
+                                        <div class="input-field col s12">
+                                            <textarea id="user_address" class="materialize-textarea" name="user_address" required></textarea>
+                                            <label for="user_address">User Address</label>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="row">                                            
+                                        <div class="col s12 l3">                                                
+                                            <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn blue m-b-xs">
+                                        </div>                                            
+                                    </div>
                             </form>
                         </div>
                     </div>
@@ -111,6 +107,17 @@ if (!isset($_POST['submit']))  {
 <?php include_once 'footer.php'; ?>
 <script>
 function getState(val) { 
+    $.ajax({
+    type: "POST",
+    url: "get_state.php",
+    data:'country_id='+val,
+    success: function(data){
+        $("#user_state_id").html(data);
+    }
+    });
+}
+
+function getCities(val) { 
     $.ajax({
     type: "POST",
     url: "get_state.php",

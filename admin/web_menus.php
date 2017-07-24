@@ -8,7 +8,7 @@
                     <div class="col s12 m12 l12">
                         <div class="card">
                             <div class="card-content">
-                                 <a href="add_web_menus.php" style="float:right">Add Web Menus</a>
+                                <!-- <a href="add_web_menus.php" style="float:right">Add Web Menus</a> -->
                                 <span class="card-title">Web Menus</span>
                                 <?php $getData = getAllData('web_menus'); ?>
                                 <table id="example" class="display responsive-table datatable-example">

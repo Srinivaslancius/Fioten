@@ -3,6 +3,7 @@ ob_start();
 session_start();
 include_once('includes/config.php');
 include_once('includes/functions.php');
+$getSiteSettingsData = getIndividualDetails('1',"site_settings","id");
 
 if(!isset($_SESSION['admin_user_id'])) {
     header("Location: logout.php");
@@ -14,7 +15,7 @@ if(!isset($_SESSION['admin_user_id'])) {
 <head>
         
         <!-- Title -->
-        <title>Fioten Admin </title>
+        <title><?php echo $getSiteSettingsData['admin_title']; ?> </title>
         <meta http-equiv="refresh" content="800;url=logout.php" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
         <meta charset="UTF-8">

@@ -72,15 +72,13 @@ if (!isset($_POST['submit']))  {
                                         </select> 
                                     </div>                                    
                                     <div class="input-field col s6">
-                                        <select name="user_city_id" id="user_city_id" required>
+                                        <select name="user_city_id" id="user_city_id" required onChange="getLocations(this.value);">
                                             <option value="">Select City</option>                                           
                                         </select> 
                                     </div>
                                     <div class="input-field col s6">
-                                        <select name="user_location_id" required>
-                                            <option value="" disabled selected>Choose your Location</option>
-                                            <option value="0">Active</option>
-                                            <option value="1">In Active</option>                                        
+                                        <select name="user_location_id" id="user_location_id" required >
+                                            <option value="" >Choose your Location</option>                                 
                                         </select>                                    
                                     </div>
                                         <div class="input-field col s12">
@@ -106,7 +104,7 @@ if (!isset($_POST['submit']))  {
 
 <?php include_once 'footer.php'; ?>
 <script>
-function getState(val) { 
+function getState(val) {
     $.ajax({
     type: "POST",
     url: "get_state.php",
@@ -120,10 +118,21 @@ function getState(val) {
 function getCities(val) { 
     $.ajax({
     type: "POST",
-    url: "get_state.php",
-    data:'country_id='+val,
+    url: "get_cities.php",
+    data:'state_id='+val,
     success: function(data){
-        $("#user_state_id").html(data);
+        $("#user_city_id").html(data);
+    }
+    });
+}
+
+function getLocations(val) { 
+    $.ajax({
+    type: "POST",
+    url: "get_locations.php",
+    data:'city_id='+val,
+    success: function(data){
+        $("#user_location_id").html(data);
     }
     });
 }

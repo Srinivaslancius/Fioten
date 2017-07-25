@@ -15,14 +15,14 @@
                                     <div class="col s12 m12 l12">
                                         <div class="col s6 m6 l6">
                                             <select id="dropdown1">
-                                             <option value=""></option>
+                                             <option value="">Select Country</option>
                                               <option value="Software Engineer">Software Engineer</option>
                                               <option value="Sales Assistant">Sales Assistant</option>
                                             </select>
                                         </div>
                                         <div class="col s6 m6 l6">
                                             <select id="dropdown2">
-                                                <option value=""></option>
+                                                <option value="">Select States</option>
                                               <option value="London">London</option>
                                               <option value="Hyderabad">Hyderabad</option>
                                             </select>

@@ -11,20 +11,39 @@
                                  <a href="add_users.php" style="float:right">Add User</a>
                                 <span class="card-title">Users</span>
                                 <?php $getData = getAllData('users'); ?>
+                                <?php $sql = "SELECT users.user_country_id, lkp_countries.country_name FROM users LEFT JOIN lkp_countries ON users.user_country_id=lkp_countries.id GROUP BY users.user_country_id";
+                                    $result = $conn->query($sql);
+
+                                    $sql1 = "SELECT users.user_state_id, lkp_states.state_name FROM users LEFT JOIN lkp_states ON users.user_state_id=lkp_states.id GROUP BY users.user_state_id";
+                                    $result1 = $conn->query($sql1);
+
+                                    $sql2 = "SELECT users.user_city_id, lkp_cities.city_name FROM users LEFT JOIN lkp_cities ON users.user_city_id=lkp_cities.id GROUP BY users.user_city_id";
+                                    $result2 = $conn->query($sql2);
+                                 ?>
 
                                     <div class="col s12 m12 l12">
-                                        <div class="col s6 m6 l6">
-                                            <select id="dropdown1">
-                                             <option value="">Select Country</option>
-                                              <option value="Software Engineer">Software Engineer</option>
-                                              <option value="Sales Assistant">Sales Assistant</option>
+                                        <div class="col s4 m4 l4">
+                                            <select id="select-country">
+                                              <option value="">Select Country</option>
+                                              <?php while ($getAllCountries = $result->fetch_assoc()) { ?>
+                                                <option value="<?php echo $getAllCountries['country_name']; ?>"><?php echo $getAllCountries['country_name']; ?></option>
+                                              <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="col s6 m6 l6">
-                                            <select id="dropdown2">
-                                                <option value="">Select States</option>
-                                              <option value="London">London</option>
-                                              <option value="Hyderabad">Hyderabad</option>
+                                        <div class="col s4 m4 l4">
+                                            <select id="select-state">
+                                              <option value="">Select State</option>
+                                              <?php while ($getAllStates = $result1->fetch_assoc()) { ?>
+                                                <option value="<?php echo $getAllStates['state_name']; ?>"><?php echo $getAllStates['state_name']; ?></option>
+                                              <?php } ?>
+                                            </select>
+                                        </div>
+                                        <div class="col s4 m4 l4">
+                                            <select id="select-cities">
+                                              <option value="">Select City</option>
+                                              <?php while ($getAllCities = $result2->fetch_assoc()) { ?>
+                                                <option value="<?php echo $getAllCities['city_name']; ?>"><?php echo $getAllCities['city_name']; ?></option>
+                                              <?php } ?>
                                             </select>
                                         </div>
                                     </div>

@@ -15,10 +15,13 @@ $(document).ready(function() {
         }
     });
     //Filters for country Satate and city
-    $('#dropdown1').on('change', function () {
+    $('#select-country').on('change', function () {
         table.columns(1).search( this.value ).draw();
     } );
-    $('#dropdown2').on('change', function () {
+    $('#select-state').on('change', function () {
+        table.columns(2).search( this.value ).draw();
+    } );
+    $('#select-cities').on('change', function () {
         table.columns(3).search( this.value ).draw();
     } );
 

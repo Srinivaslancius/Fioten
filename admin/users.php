@@ -41,7 +41,12 @@
                                                         <h5 class="modal-title-set"><b>Name :</b><?php echo $row['user_name'];?></h5>
                                                         <h5 class="modal-title-set"><b>Email :</b><?php echo $row['user_email'];?></h5>
                                                         <h5 class="modal-title-set"><b>Mobile :</b><?php echo $row['user_mobile'];?></h5>
+                                                        <h5 class="modal-title-set"><b>Country :</b><?php $country =  getIndividualDetails($row['user_country_id'],'lkp_countries','id'); echo $country['country_name']?></h5>
+                                                        <h5 class="modal-title-set"><b>State :</b><?php $country =  getIndividualDetails($row['user_state_id'],'lkp_states','id'); echo $country['state_name']?></h5>
+                                                        <h5 class="modal-title-set"><b>City :</b><?php $country =  getIndividualDetails($row['user_city_id'],'lkp_cities','id'); echo $country['city_name']?></h5>
+                                                        <h5 class="modal-title-set"><b>Location :</b><?php $country =  getIndividualDetails($row['user_location_id'],'lkp_locations','id'); echo $country['location_name']?></h5>
                                                         <h5 class="modal-title-set"><b>Address :</b><?php echo $row['user_address'];?></h5>
+                                                        <h5 class="modal-title-set"><b>Status :</b><?php if ($row['status']==1){echo 'Active';} else {echo  'InActive';}?></h5>
                                                     </div>
                                                     <div class="modal-footer" >
                                                           <button type="button" class="btn" data-dismiss="modal" style="background-color:#f00; color:#fff">Close</button>

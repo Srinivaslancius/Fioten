@@ -14,10 +14,7 @@ $id = $_GET['uid'];
             $user_state_id = $_POST['user_state_id'];
             $user_city_id = $_POST['user_city_id'];
             $user_location_id = $_POST['user_location_id'];
-            $user_password = $_POST['user_password'];
-            $country_name =  $_POST['country_name'];
-            $state_name =  $_POST['state_name'];
-            $city_name =  $_POST['city_name'];
+            $user_password = encryptPassword($_POST['user_password']);
             $user_address = $_POST['user_address'];
             $status = $_POST['status'];
             
@@ -99,11 +96,13 @@ $id = $_GET['uid'];
                                         <textarea id="user_address" class="materialize-textarea" name="user_address" required><?php echo $getUsers1['user_address'];?></textarea>
                                         <label for="user_address">User Address</label>
                                     </div>
+                                    <?php $getStatus = getAllData('user_status'); ?>
                                     <div class="input-field col s12">
-                                        <select name="status" required>
-                                            <option value="" disabled selected>Choose your status</option>
-                                            <option value="0" <?php if($getUsers1['status'] == 0) { echo "Selected"; }?>>Active</option>
-                                            <option value="1" <?php if($getUsers1['status'] == 1) { echo "Selected"; }?>>In Active</option>                                            
+                                        <select name="status" required >
+                                            <option value="" >Choose your Status</option> 
+                                            <?php while($row = $getStatus->fetch_assoc()) {  ?>
+                                                <option <?php if($row['id'] == $getUsers1['status']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['status']; ?></option>
+                                            <?php } ?>                                
                                         </select>                                    
                                     </div>
 

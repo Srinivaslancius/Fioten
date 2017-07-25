@@ -15,12 +15,10 @@ if (!isset($_POST['submit']))  {
     $user_location_id = $_POST['user_location_id'];
     $user_password = $_POST['user_password'];
     $user_address = $_POST['user_address'];
-    $country_name =  $_POST['country_name'];
-    $state_name =  $_POST['state_name'];
-    $city_name =  $_POST['city_name'];
     $created_admin_id = $_SESSION['admin_user_id'];
     $created_at = date("Y-m-d h:i:s");
-    $sql = "INSERT INTO users (`user_name`, `user_email`, `user_mobile`, `user_country_id`, `user_state_id`, `user_city_id`, `user_location_id`, `user_password`, `user_address`,`created_admin_id`, `created_at`, `status`) VALUES ('$user_name', '$user_email', '$user_mobile', '$user_country_id', '$user_state_id', '$user_city_id', '$user_mobile', '$user_mobile', '$user_address', '$created_admin_id', '$created_at', 2)";
+    encryptPassword($_POST['admin_password']);
+    $sql = "INSERT INTO users (`user_name`, `user_email`, `user_mobile`, `user_country_id`, `user_state_id`, `user_city_id`, `user_location_id`, `user_password`, `user_address`,`created_admin_id`, `created_at`, `status`) VALUES ('$user_name', '$user_email', '$user_mobile', '$user_country_id', '$user_state_id', '$user_city_id', '$user_location_id', '$user_password', '$user_address', '$created_admin_id', '$created_at', 2)";
     if($conn->query($sql) === TRUE){
        echo "<script>alert('Data Updated Successfully');window.location.href='users.php';</script>";
     } else {
@@ -81,10 +79,10 @@ if (!isset($_POST['submit']))  {
                                             <option value="" >Choose your Location</option>                                 
                                         </select>                                    
                                     </div>
-                                        <div class="input-field col s12">
-                                            <textarea id="user_address" class="materialize-textarea" name="user_address" required></textarea>
-                                            <label for="user_address">User Address</label>
-                                        </div>
+                                    <div class="input-field col s12">
+                                        <textarea id="user_address" class="materialize-textarea" name="user_address" required></textarea>
+                                        <label for="user_address">User Address</label>
+                                    </div>
                                        
                                     </div>
                                     <div class="row">                                            

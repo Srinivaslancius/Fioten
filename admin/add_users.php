@@ -89,8 +89,8 @@ if (!isset($_POST['submit']))  {
                                             <option value="">Select Status</option>
                                             <?php while($row = $getStatus->fetch_assoc()) {  ?>
                                                 <option value="<?php echo $row['id']; ?>"><?php echo $row['status']; ?></option>
-                                            <?php } ?>                                            
-                                        </select>                                    
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                        
                                     </div>

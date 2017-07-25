@@ -1,31 +1,6 @@
             <?php include_once 'main_header.php'; ?>
            
             <?php include_once 'side_navigation.php';?>
-            <script>
-                $(document).ready(function() {
-                    $('#example').DataTable( {
-                        initComplete: function () {
-                            this.api().columns().every( function () {
-                                var column = this;
-                                var select = $('<select><option value=""></option></select>')
-                                    .appendTo( $(column.footer()).empty() )
-                                    .on( 'change', function () {
-                                        var val = $.fn.dataTable.util.escapeRegex(
-                                            $(this).val()
-                                        );
-                 
-                                        column
-                                            .search( val ? '^'+val+'$' : '', true, false )
-                                            .draw();
-                                    } );
-                                column.data().unique().sort().each( function ( d, j ) {
-                                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                                });
-                            });
-                        }
-                    });
-                });
-            </script>
 
             <main class="mn-inner">
                 <div class="row">
@@ -36,7 +11,25 @@
                                  <a href="add_users.php" style="float:right">Add User</a>
                                 <span class="card-title">Users</span>
                                 <?php $getData = getAllData('users'); ?>
-                                <table id="example" class="display responsive-table datatable-example">
+
+                                    <div class="col s12 m12 l12">
+                                        <div class="col s6 m6 l6">
+                                            <select id="dropdown1">
+                                             <option value=""></option>
+                                              <option value="Software Engineer">Software Engineer</option>
+                                              <option value="Sales Assistant">Sales Assistant</option>
+                                            </select>
+                                        </div>
+                                        <div class="col s6 m6 l6">
+                                            <select id="dropdown2">
+                                                <option value=""></option>
+                                              <option value="London">London</option>
+                                              <option value="Hyderabad">Hyderabad</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <table id="example" class="display responsive-table datatable-example">
                                     <thead>
                                         <tr>
                                             <th>User Name</th>

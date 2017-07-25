@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    $('#example').DataTable({
+
+    var table =  $('#example').DataTable({
         language: {
             searchPlaceholder: 'Search records',
             sSearch: '',
@@ -10,8 +11,17 @@ $(document).ready(function() {
                 sPrevious: '<i class="material-icons">chevron_left</i>',
                 sNext: '<i class="material-icons">chevron_right</i>',
                 sLast: '<i class="material-icons">chevron_right</i>' 
-        }
+            }
         }
     });
+    //Filters for country Satate and city
+    $('#dropdown1').on('change', function () {
+        table.columns(1).search( this.value ).draw();
+    } );
+    $('#dropdown2').on('change', function () {
+        table.columns(3).search( this.value ).draw();
+    } );
+
+    
     $('.dataTables_length select').addClass('browser-default');
 });

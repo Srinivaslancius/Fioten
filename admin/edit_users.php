@@ -58,38 +58,40 @@ $id = $_GET['uid'];
                                         <input id="user_password" type="password" class="validate" name="user_password" required value="<?php echo $getUsers1['user_password'];?>">
                                         <label for="user_password">User Pssword</label>
                                     </div>
-                                     <?php $getCountries = getAllDataCheckActive('lkp_countries',0); ?>
-                                <div class="input-field col s6">
-                                    <select name="user_country_id" required>
-                                        <option value="">Select Country</option>
-                                        <?php while($row = $getCountries->fetch_assoc()) {  ?>
-                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['country_name']; ?></option>
-                                        <?php } ?>
-                                    </select> 
-                                </div>
-                                <?php $getStates = getAllDataCheckActive('lkp_states',0); ?>
-                                <div class="input-field col s6">
-                                    <select name="user_state_id" required>
-                                        <option value="">Select State</option>
-                                        <?php while($row = $getStates->fetch_assoc()) {  ?>
-                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
-                                        <?php } ?>
-                                    </select> 
-                                </div>
-                                <?php $getCities = getAllDataCheckActive('lkp_cities',0); ?>
-                                <div class="input-field col s6">
-                                    <select name="user_city_id" required>
-                                        <option value="">Select City</option>
-                                        <?php while($row = $getCities->fetch_assoc()) {  ?>
-                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
-                                        <?php } ?>
-                                    </select> 
-                                </div>
+                                    <?php $getCountries = getAllDataCheckActive('lkp_countries',0); ?>
                                     <div class="input-field col s6">
-                                        <select name="user_location_id" required>
-                                            <option value="" disabled selected>Choose your Location</option>
-                                            <option value="0" <?php if($getUsers1['user_location_id'] == 0) { echo "Selected"; }?>>Active</option>
-                                            <option value="1" <?php if($getUsers1['user_location_id'] == 1) { echo "Selected"; }?>>In Active</option>                                
+                                        <select name="user_country_id" id="user_country_id" required onChange="getState(this.value);">
+                                            <option value="">Select Country</option>
+                                            <?php while($row = $getCountries->fetch_assoc()) {  ?>
+                                                <option <?php if($row['id'] == $getUsers1['user_country_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['country_name']; ?></option>
+                                            <?php } ?>
+                                        </select> 
+                                    </div>
+                                    <?php $getStates = getAllDataCheckActive('lkp_states',0); ?>
+                                    <div class="input-field col s6">
+                                        <select name="user_state_id" id="user_state_id" required onChange="getCities(this.value);">
+                                            <option value="">Select State</option>
+                                            <?php while($row = $getStates->fetch_assoc()) {  ?>
+                                                <option <?php if($row['id'] == $getUsers1['user_state_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['state_name']; ?></option>
+                                            <?php } ?>
+                                        </select> 
+                                    </div>
+                                    <?php $getCities = getAllDataCheckActive('lkp_cities',0); ?>
+                                    <div class="input-field col s6">
+                                        <select name="user_city_id" id="user_city_id" required onChange="getLocations(this.value);">
+                                            <option value="">Select City</option>
+                                            <?php while($row = $getCities->fetch_assoc()) {  ?>
+                                                <option <?php if($row['id'] == $getUsers1['user_city_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['city_name']; ?></option>
+                                            <?php } ?>
+                                        </select> 
+                                    </div>
+                                    <?php $getLocations = getAllDataCheckActive('lkp_locations',0); ?>
+                                    <div class="input-field col s6">
+                                        <select name="user_location_id" id="user_location_id" required >
+                                            <option value="" >Choose your Location</option> 
+                                            <?php while($row = $getLocations->fetch_assoc()) {  ?>
+                                                <option <?php if($row['id'] == $getUsers1['user_location_id']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['location_name']; ?></option>
+                                            <?php } ?>                                
                                         </select>                                    
                                     </div>
                                 
@@ -101,17 +103,16 @@ $id = $_GET['uid'];
                                         <select name="status" required>
                                             <option value="" disabled selected>Choose your status</option>
                                             <option value="0" <?php if($getUsers1['status'] == 0) { echo "Selected"; }?>>Active</option>
-                                            <option value="1" <?php if($getUsers1['status'] == 1) { echo "Selected"; }?>>In Active</option>
-                                            <option value="2" <?php if($getUsers1['status'] == 2) { echo "Selected"; }?>>Member</option>                                       
+                                            <option value="1" <?php if($getUsers1['status'] == 1) { echo "Selected"; }?>>In Active</option>                                            
                                         </select>                                    
                                     </div>
 
-                                </div>
-                                <div class="row">                                            
-                                    <div class="col s12 l3">                                                
-                                        <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn blue m-b-xs">
-                                    </div>                                            
-                                </div>
+                                    </div>
+                                    <div class="row">                                            
+                                        <div class="col s12 l3">                                                
+                                            <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn blue m-b-xs">
+                                        </div>                                            
+                                    </div>
                             </form>
                     </div>
                 </div>
@@ -122,3 +123,37 @@ $id = $_GET['uid'];
     </div>
 </main>
 <?php include_once 'footer.php'; ?>
+<script>
+function getState(val) {
+    $.ajax({
+    type: "POST",
+    url: "get_state.php",
+    data:'country_id='+val,
+    success: function(data){
+        $("#user_state_id").html(data);
+    }
+    });
+}
+
+function getCities(val) { 
+    $.ajax({
+    type: "POST",
+    url: "get_cities.php",
+    data:'state_id='+val,
+    success: function(data){
+        $("#user_city_id").html(data);
+    }
+    });
+}
+
+function getLocations(val) { 
+    $.ajax({
+    type: "POST",
+    url: "get_locations.php",
+    data:'city_id='+val,
+    success: function(data){
+        $("#user_location_id").html(data);
+    }
+    });
+}
+</script>

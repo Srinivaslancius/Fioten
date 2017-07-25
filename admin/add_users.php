@@ -2,6 +2,7 @@
            
 <?php include_once 'side_navigation.php';?>
 <?php  
+error_reporting(0);
 if (!isset($_POST['submit']))  {
             echo "";
 } else  {
@@ -17,7 +18,7 @@ if (!isset($_POST['submit']))  {
     $user_address = $_POST['user_address'];
     $created_admin_id = $_SESSION['admin_user_id'];
     $created_at = date("Y-m-d h:i:s");
-    $sql = "INSERT INTO users (`user_name`, `user_email`, `user_mobile`, `user_country_id`, `user_state_id`, `user_city_id`, `user_location_id`, `user_password`, `user_address`,`created_admin_id`, `created_at`, `status`) VALUES ('$user_name', '$user_email', '$user_mobile', '$user_country_id', '$user_state_id', '$user_city_id', '$user_location_id', '$user_password', '$user_address', '$created_admin_id', '$created_at', 2)";
+    $sql = "INSERT INTO users (`user_name`, `user_email`, `user_mobile`, `user_country_id`, `user_state_id`, `user_city_id`, `user_location_id`, `user_password`, `user_address`,`created_admin_id`, `created_at`, `status`) VALUES ('$user_name', '$user_email', '$user_mobile', '$user_country_id', '$user_state_id', '$user_city_id', '$user_location_id', '$user_password', '$user_address', '$created_admin_id', '$created_at', 1)";
     if($conn->query($sql) === TRUE){
        echo "<script>alert('Data Updated Successfully');window.location.href='users.php';</script>";
     } else {
@@ -51,7 +52,7 @@ if (!isset($_POST['submit']))  {
                                         <label for="user_mobile">User Mobile</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="user_password" type="text" class="validate" name="user_password" required>
+                                        <input id="user_password" type="password" class="validate" name="user_password" required>
                                         <label for="user_password">User Password</label>
                                     </div>
                                     <?php $getCountries = getAllDataCheckActive('lkp_countries',0); ?>

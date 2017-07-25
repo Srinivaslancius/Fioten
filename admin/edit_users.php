@@ -2,6 +2,7 @@
            
 <?php include_once 'side_navigation.php';?>
 <?php  
+error_reporting(0);
 $id = $_GET['uid'];
  if (!isset($_POST['submit']))  {
             echo "";

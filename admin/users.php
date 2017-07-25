@@ -1,6 +1,31 @@
             <?php include_once 'main_header.php'; ?>
            
             <?php include_once 'side_navigation.php';?>
+            <script>
+                $(document).ready(function() {
+                    $('#example').DataTable( {
+                        initComplete: function () {
+                            this.api().columns().every( function () {
+                                var column = this;
+                                var select = $('<select><option value=""></option></select>')
+                                    .appendTo( $(column.footer()).empty() )
+                                    .on( 'change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+                 
+                                        column
+                                            .search( val ? '^'+val+'$' : '', true, false )
+                                            .draw();
+                                    } );
+                                column.data().unique().sort().each( function ( d, j ) {
+                                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                                });
+                            });
+                        }
+                    });
+                });
+            </script>
 
             <main class="mn-inner">
                 <div class="row">
@@ -15,19 +40,21 @@
                                     <thead>
                                         <tr>
                                             <th>User Name</th>
-                                            <th>User Email </th>
-                                            <th>User Mobile </th> 
+                                            <th>Country</th>
+                                            <th>State</th>
+                                            <th>city</th>
                                             <th>User Address </th>
-                                            <th>Created Date</th>                                            
+                                            <th>Created Date</th>
                                             <th>Actions</th>
                                         </tr>
-                                    </thead>                                    
+                                    </thead>
                                     <tbody>
                                         <?php while ($row = $getData->fetch_assoc()) { ?>
                                         <tr>
                                             <td><?php echo $row['user_name'];?></td>
-                                            <td><?php echo $row['user_email'];?></td>
-                                            <td><?php echo $row['user_mobile'];?></td>
+                                            <td><?php $country =  getIndividualDetails($row['user_country_id'],'lkp_countries','id'); echo $country['country_name']?></td>
+                                            <td><?php $country =  getIndividualDetails($row['user_state_id'],'lkp_states','id'); echo $country['state_name']?></td>
+                                            <td><?php $country =  getIndividualDetails($row['user_city_id'],'lkp_cities','id'); echo $country['city_name']?></td>
                                             <td><?php echo $row['user_address'];?></td>
                                             <td><?php echo $row['created_at'];?></td>
                                             <td><a href="edit_users.php?uid=<?php echo $row['id'];?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">pageview</i></a><a href="#"><i class="material-icons dp48">delete</i></a></td>
@@ -55,8 +82,7 @@
                                             </div>
                                         </div>
 
-                                        </tr>    
-
+                                        </tr>
                                          
                                         <?php } ?>
                                     </tbody>

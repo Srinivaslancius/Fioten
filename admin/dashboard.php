@@ -74,7 +74,7 @@
                                    
                                 </div>
                                 <span class="card-title">Admin Users</span>
-                                <span class="stats-counter"><span class="counter">83710</span></span>
+                                <span class="stats-counter"><span class="counter"><?php echo getRowsCount('admin_users');?></span></span>
                             </div>
                             <div id="sparkline-line"></div>
                         </div>
@@ -83,7 +83,7 @@
                         <div class="card stats-card">
                             <div class="card-content">                                
                                 <span class="card-title">Customers</span>
-                                <span class="stats-counter">$<span class="counter">48190</span><small>This week</small></span>
+                                <span class="stats-counter"><span class="counter"><?php echo getRowsCount('users');?></span></span>
                             </div>
                             <div id="sparkline-bar"></div>
                         </div>
@@ -95,7 +95,7 @@
                                     
                                 </div>
                                 <span class="card-title">Products</span>
-                                <span class="stats-counter"><span class="counter">83710</span></span>
+                                <span class="stats-counter"><span class="counter"><?php echo getRowsCount('products');?></span></span>
                             </div>
                             <div id="sparkline-line"></div>
                         </div>

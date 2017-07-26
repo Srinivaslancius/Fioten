@@ -121,7 +121,14 @@
         
 
         <?php
-            $sql= "SELECT * FROM orders";
+            $status1 = 'Completed';
+            $status2 = 'InProgress';
+            $status3 = 'Failure';
+            $sql4= "SELECT * FROM orders WHERE `order_status` = ' ". $status1. " '";
+            $result4 = $conn->query($sql4);
+            $sql= "SELECT * FROM orders WHERE `order_status` = ' ". $status2. " '";
+            $result = $conn->query($sql);
+            $sql= "SELECT * FROM orders WHERE `order_status` = ' ". $status3. " '";
             $result = $conn->query($sql);
             //$row = $result->fetch_assoc();
             //echo "<pre>"; print_r($row);     die;
@@ -134,15 +141,15 @@
                 var flot3 = function () {
                     var data = [{
                         label: "Completed Orders",
-                        data: 42,
+                        data: <?php echo $sum3;?>,
                         color: "#3366CC",
                     }, {
                         label: "Pending Orders",
-                        data: 23,
+                        data: <?php echo $sum3;?>,
                         color: "#ff9800",
                     }, {
                         label: "In Progress Orders",
-                        data: 35,
+                        data: <?php echo $sum3;?>,
                         color: "#82b1ff",
                     }];
                     var options = {

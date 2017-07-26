@@ -3,6 +3,20 @@
 <?php include_once 'side_navigation.php';?>
 
             <main class="mn-inner">
+                <?php 
+                $result = $conn->query("SELECT count(*) AS total FROM `orders` WHERE `order_date` > DATE_SUB(CURDATE(), INTERVAL 1 WEEK)");
+                $row = $result->fetch_assoc();
+                $sum = $row['total'];
+                $result1 = $conn->query("SELECT count(*) AS total1 FROM `orders` WHERE `order_date` > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)");
+                $row1 = $result1->fetch_assoc();
+                $sum1 = $row1['total1'];
+                $result2 = $conn->query("SELECT count(*) AS total2 FROM `orders` WHERE `order_date` > DATE_SUB(CURDATE(), INTERVAL 12 MONTH)");
+                $row2 = $result2->fetch_assoc();
+                $sum2 = $row2['total2'];
+                $result3 = $conn->query("SELECT count(*) AS total3 FROM `orders`");
+                $row3 = $result3->fetch_assoc();
+                $sum3 = $row3['total3'];
+                ?>
 
                 <div>
                     <div class="row no-m-t no-m-b">
@@ -13,7 +27,7 @@
                                     
                                 </div>
                                 <span class="card-title">Orders</span>
-                                <span class="stats-counter">$<span class="counter">48190</span><small>This week</small></span>
+                                <span class="stats-counter"><span class="counter"><?php echo $sum;?></span><small>This week</small></span>
                             </div>
                             <div id="sparkline-bar"></div>
                         </div>
@@ -22,12 +36,9 @@
                         <div class="card stats-card">
                             <div class="card-content">
                                 <div class="card-options">
-                                    <ul>
-                                        <li><a href="javascript:void(0)"><i class="material-icons">more_vert</i></a></li>
-                                    </ul>
                                 </div>
                                 <span class="card-title">Orders</span>
-                                <span class="stats-counter"><span class="counter">83710</span><small>This month</small></span>
+                                <span class="stats-counter"><span class="counter"><?php echo $sum1;?></span><small>This month</small></span>
                             </div>
                             <div id="sparkline-line"></div>
                         </div>
@@ -36,12 +47,10 @@
                         <div class="card stats-card">
                             <div class="card-content">
                                 <div class="card-options">
-                                    <ul>
-                                        <li><a href="javascript:void(0)"><i class="material-icons">more_vert</i></a></li>
-                                    </ul>
+                                    
                                 </div>
                                 <span class="card-title">Orders</span>
-                                <span class="stats-counter"><span class="counter">83710</span><small>This Year</small></span>
+                                <span class="stats-counter"><span class="counter"><?php echo $sum2;?></span><small>This Year</small></span>
                             </div>
                             <div id="sparkline-line"></div>
                         </div>
@@ -50,12 +59,10 @@
                         <div class="card stats-card">
                             <div class="card-content">
                                 <div class="card-options">
-                                    <ul>
-                                        <li><a href="javascript:void(0)"><i class="material-icons">more_vert</i></a></li>
-                                    </ul>
+                                    
                                 </div>
                                 <span class="card-title">Orders</span>
-                                <span class="stats-counter"><span class="counter">83710</span><small>Total</small></span>
+                                <span class="stats-counter"><span class="counter"><?php echo $sum3;?></span><small>Total</small></span>
                             </div>
                             <div id="sparkline-line"></div>
                         </div>
@@ -64,9 +71,7 @@
                         <div class="card stats-card">
                             <div class="card-content">
                                 <div class="card-options">
-                                    <ul>
-                                        <li><a href="javascript:void(0)"><i class="material-icons">more_vert</i></a></li>
-                                    </ul>
+                                   
                                 </div>
                                 <span class="card-title">Admin Users</span>
                                 <span class="stats-counter"><span class="counter">83710</span></span>
@@ -87,9 +92,7 @@
                         <div class="card stats-card">
                             <div class="card-content">
                                 <div class="card-options">
-                                    <ul>
-                                        <li><a href="javascript:void(0)"><i class="material-icons">more_vert</i></a></li>
-                                    </ul>
+                                    
                                 </div>
                                 <span class="card-title">Products</span>
                                 <span class="stats-counter"><span class="counter">83710</span></span>

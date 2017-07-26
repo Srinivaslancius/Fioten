@@ -133,15 +133,15 @@
                 
                 var flot3 = function () {
                     var data = [{
-                        label: "1",
+                        label: "Completed Orders",
                         data: 42,
                         color: "#3366CC",
                     }, {
-                        label: "2",
+                        label: "Pending Orders",
                         data: 23,
                         color: "#ff9800",
                     }, {
-                        label: "3",
+                        label: "In Progress Orders",
                         data: 35,
                         color: "#82b1ff",
                     }];

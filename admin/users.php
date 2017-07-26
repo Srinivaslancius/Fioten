@@ -48,6 +48,17 @@
                                         </div>
                                     </div>
 
+                                    <div class="col s12 m12 l12 checkbox_new_div" style="position: relative; top: 9px; text-align:center ;">
+                                        <p class="p-v-xs col s4">
+                                            <input id="test5" onchange="filterme()" type="checkbox" name="type" value="Active">
+                                            <label for="test5">Verified Users</label>
+                                        </p>
+                                        <p class="p-v-xs col s4">
+                                            <input id="test6" onchange="filterme()" type="checkbox" name="type" value="In Active">
+                                            <label for="test6">Non Verified Users</label>
+                                        </p>                                        
+                                    </div>
+
                                     <table id="example" class="display responsive-table datatable-example">
                                     <thead>
                                         <tr>
@@ -56,7 +67,7 @@
                                             <th>State</th>
                                             <th>city</th>
                                             <th>User Address </th>
-                                            <th>Created Date</th>
+                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -68,7 +79,7 @@
                                             <td><?php $country =  getIndividualDetails($row['user_state_id'],'lkp_states','id'); echo $country['state_name']?></td>
                                             <td><?php $country =  getIndividualDetails($row['user_city_id'],'lkp_cities','id'); echo $country['city_name']?></td>
                                             <td><?php echo $row['user_address'];?></td>
-                                            <td><?php echo $row['created_at'];?></td>
+                                            <td><?php $getCategoryName = getIndividualDetails($row['status'],'user_status','id'); echo $getCategoryName['status'];?></td>
                                             <td><a href="edit_users.php?uid=<?php echo $row['id'];?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">pageview</i></a><a href="#"><i class="material-icons dp48">delete</i></a></td>
                                             <div id="myModal_<?php echo $row['id']; ?>" class="modal fade" >
                                             <div class="modal-dialog" Style="margin-top:10%;">

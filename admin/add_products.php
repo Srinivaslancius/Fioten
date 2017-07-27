@@ -8,10 +8,15 @@ if (!isset($_POST['submit']))  {
     //Save data into database
     $product_name = $_POST['product_name'];
     $category_id = $_POST['category_id'];
-    //$price = $_POST['price'];
-    //$special_price = $_POST['special_price'];
+    // $price = $_POST['price'];
+    // $special_price = $_POST['special_price'];
+    // $selling_price = $_POST['selling_price'];
     //$discount_percentage = $_POST['discount_percentage'];
     //$weight_type_id = $_POST['weight_type_id'];
+    $deal_start_date = $_POST['deal_start_date'];
+    $deal_end_date = $_POST['deal_end_date'];
+    $quantity = $_POST['quantity'];
+    $minimum_order_quantity = $_POST['minimum_order_quantity'];
     $key_features = $_POST['key_features'];
     $product_info = $_POST['product_info'];
     $about = $_POST['about'];
@@ -21,7 +26,7 @@ if (!isset($_POST['submit']))  {
     $created_by = $_SESSION['admin_user_id'];
     //save product images into product_images table    
     
-     $sql1 = "INSERT INTO products (`product_name`,`category_id`, `key_features`,`product_info`,`about`,`availability_id`,`status`,`created_by`,`created_at`) VALUES ('$product_name','$category_id', '$key_features','$product_info','$about','$availability_id','$status','$created_by','$created_at')";
+     $sql1 = "INSERT INTO products (`product_name`,`category_id`, `deal_start_date`, `deal_end_date`, `quantity`, `minimum_order_quantity`, `key_features`,`product_info`,`about`,`availability_id`,`status`,`created_by`,`created_at`) VALUES ('$product_name','$category_id', '$deal_start_date', '$deal_end_date', '$quantity', '$minimum_order_quantity', '$key_features','$product_info','$about','$availability_id','$status','$created_by','$created_at')";
      $result1 = $conn->query($sql1);
      $last_id = $conn->insert_id;
 
@@ -64,11 +69,6 @@ if (!isset($_POST['submit']))  {
                     <div class="row">
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
-
-                                <div class="input-field col s12">
-                                    <input id="product_name" type="text" class="validate" name="product_name" required>
-                                    <label for="product_name">Product Name</label>
-                                </div>
                                
                                 <?php
                                     $getCategories = getAllDataCheckActive('categories',0);                             
@@ -82,16 +82,11 @@ if (!isset($_POST['submit']))  {
                                         <?php } ?>
                                     </select> 
                                 </div>
-
+                                <div class="input-field col s12">
+                                    <input id="product_name" type="text" class="validate" name="product_name" required>
+                                    <label for="product_name">Product Name</label>
+                                </div>
                                 <div>
-                                    <div class="input-field col s4">
-                                        <select name="weight_type_id[]" required>
-                                            <option value="">Select Weighy Type</option>
-                                            <?php while($row = $getWeights->fetch_assoc()) {  ?>
-                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['weight_type']; ?></option>
-                                            <?php } ?>                                      
-                                        </select> 
-                                    </div>
                                     <div class="input-field col s4">
                                        <input id="price" type="text" class="validate" name="price[]" required>
                                        <label for="price">Price</label>
@@ -99,14 +94,42 @@ if (!isset($_POST['submit']))  {
                                     <div class="input-field col s4">
                                        <a href="javascript:void(0);"  ><img src="add-icon.png" onclick="addInput('dynamicInput');" /></a>
                                     </div>
+                                    <div class="input-field col s4">
+                                       <input id="special_price" type="text" class="validate" name="special_price[]" required>
+                                       <label for="special_price">Special Price</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                       <input id="selling_price" type="text" class="validate" name="selling_price[]" required>
+                                       <label for="selling_price">Selling Price</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <label for="deal_start_date">Deal Start date</label>
+                                            <input id="deal_start_date" type="text" class="datepicker">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                            <div class="col s12">
+                                                <label for="deal_end_date">Deal End date</label>
+                                                <input id="deal_end_date" type="text" class="datepicker">
+                                            </div>
+                                        </div>
+                                    <div class="input-field col s6">
+                                        <input id="quantity" type="text" class="validate" name="quantity" required>
+                                        <label for="quantity">Quantity</label>
+                                    </div>
+                                    <div class="input-field col s6">
+                                        <input id="minimum_order_quantity" type="text" class="validate" name="minimum_order_quantity" required>
+                                        <label for="minimum_order_quantity">Minimum Order Quantity</label>
+                                    </div>
                                     <div id="dynamicInput" class="input-field col s12"></div>
-                                </div>
+                                    </div>
                                 
                                 <div class="input-field col s12">
-                                        <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Key Features</span> <br /><br />
-                                        <div class="col-lg-9">
-                                            <textarea id="key_features" name="key_features" required></textarea>                                        
-                                        </div>
+                                    <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Key Features</span> <br /><br />
+                                    <div class="col-lg-9">
+                                        <textarea id="key_features" name="key_features" required></textarea>                                        
+                                    </div>
                                 </div>
                                         
                                 <div class="input-field col s12">

@@ -124,12 +124,18 @@
             $status1 = 'Completed';
             $status2 = 'InProgress';
             $status3 = 'Failure';
-            $sql4= "SELECT * FROM orders WHERE `order_status` = ' ". $status1. " '";
+            $sql4= "SELECT COUNT(*) AS total FROM orders WHERE `order_status` = '".$status1."'";
             $result4 = $conn->query($sql4);
-            $sql= "SELECT * FROM orders WHERE `order_status` = ' ". $status2. " '";
-            $result = $conn->query($sql);
-            $sql= "SELECT * FROM orders WHERE `order_status` = ' ". $status3. " '";
-            $result = $conn->query($sql);
+            $row = $result4->fetch_assoc();
+            $CompalteCount = $row['total'];
+            $sql6= "SELECT COUNT(*) AS total FROM orders WHERE `order_status` = '".$status2."'";
+            $result5 = $conn->query($sql6);
+            $row2 = $result5->fetch_assoc();
+            $progressCount = $row2['total'];
+            $sql7= "SELECT COUNT(*) AS total FROM orders WHERE `order_status` = '".$status3."'";
+            $result7 = $conn->query($sql7);
+            $row4 = $result7->fetch_assoc();
+            $fasil = $row4['total'];
             //$row = $result->fetch_assoc();
             //echo "<pre>"; print_r($row);     die;
         ?>
@@ -141,15 +147,15 @@
                 var flot3 = function () {
                     var data = [{
                         label: "Completed Orders",
-                        data: <?php echo $sum3;?>,
+                        data: <?php echo $CompalteCount;?>,
                         color: "#3366CC",
                     }, {
-                        label: "Pending Orders",
-                        data: <?php echo $sum3;?>,
+                        label: "In Progress Orders",
+                        data: <?php echo $progressCount;?>,
                         color: "#ff9800",
                     }, {
-                        label: "In Progress Orders",
-                        data: <?php echo $sum3;?>,
+                        label: "Pending Orders",
+                        data: <?php echo $fasil;?>,
                         color: "#82b1ff",
                     }];
                     var options = {

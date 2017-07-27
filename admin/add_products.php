@@ -86,44 +86,36 @@ if (!isset($_POST['submit']))  {
                                     <input id="product_name" type="text" class="validate" name="product_name" required>
                                     <label for="product_name">Product Name</label>
                                 </div>
-                                <div>
-                                    <div class="input-field col s4">
-                                       <input id="price" type="text" class="validate" name="price[]" required>
-                                       <label for="price">Price</label>
+                                
+                                <div class="input-field col s12">
+                                   <input id="product_price" type="text" class="validate" name="product_price" required>
+                                   <label for="product_price">Product Price</label>
+                                </div>
+                              
+                                <div class="input-field col s12">
+                                   <input id="selling_price" readonly type="text" class="validate" name="selling_price[]" required>
+                                   <label for="selling_price">Selling Price</label>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <label for="deal_start_date">Deal Start date</label>
+                                        <input id="deal_start_date" type="text" class="datepicker">
                                     </div>
-                                    <div class="input-field col s4">
-                                       <a href="javascript:void(0);"  ><img src="add-icon.png" onclick="addInput('dynamicInput');" /></a>
-                                    </div>
-                                    <div class="input-field col s4">
-                                       <input id="special_price" type="text" class="validate" name="special_price[]" required>
-                                       <label for="special_price">Special Price</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                       <input id="selling_price" type="text" class="validate" name="selling_price[]" required>
-                                       <label for="selling_price">Selling Price</label>
-                                    </div>
-                                    <div class="row">
+                                </div>
+                                <div class="row">
                                         <div class="col s12">
-                                            <label for="deal_start_date">Deal Start date</label>
-                                            <input id="deal_start_date" type="text" class="datepicker">
+                                            <label for="deal_end_date">Deal End date</label>
+                                            <input id="deal_end_date" type="text" class="datepicker">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                            <div class="col s12">
-                                                <label for="deal_end_date">Deal End date</label>
-                                                <input id="deal_end_date" type="text" class="datepicker">
-                                            </div>
-                                        </div>
-                                    <div class="input-field col s6">
-                                        <input id="quantity" type="text" class="validate" name="quantity" required>
-                                        <label for="quantity">Quantity</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <input id="minimum_order_quantity" type="text" class="validate" name="minimum_order_quantity" required>
-                                        <label for="minimum_order_quantity">Minimum Order Quantity</label>
-                                    </div>
-                                    <div id="dynamicInput" class="input-field col s12"></div>
-                                    </div>
+                                <div class="input-field col s6">
+                                    <input id="quantity" type="text" class="validate" name="quantity" required>
+                                    <label for="quantity">Quantity</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="minimum_order_quantity" type="text" class="validate" name="minimum_order_quantity" required>
+                                    <label for="minimum_order_quantity">Minimum Order Quantity</label>
+                                </div>
                                 
                                 <div class="input-field col s12">
                                     <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Key Features</span> <br /><br />
@@ -186,44 +178,6 @@ if (!isset($_POST['submit']))  {
 </main>
 
 <?php include_once('ck_editor.php'); include_once 'footer.php'; ?>
-
-<?php
-    $sql1 = "SELECT * FROM product_weights where status = '0'";
-    $result1 = $conn->query($sql1);                                    
-?>
-
-<?php while($row = $result1->fetch_assoc()) { 
-   $choices1[] = $row['id'];
-   $choices_names[] = $row['weight_type'];
-} ?>
-
-<script type="text/javascript">
-
-function addInput(divName) {
-    var choices = <?php echo json_encode($choices1); ?>; 
-    var choices_names = <?php echo json_encode($choices_names); ?>;      
-    var newDiv = document.createElement('div');
-    newDiv.className = 'new_appen_class';
-    var selectHTML = "";    
-    selectHTML="<div class='input-field col s4'><select name='weight_type_id[]' style='display:block !important'><option value=''>Select Weighy Type</option>";
-    var newTextBox = "<div class='input-field col s4'><input type='text' name='price[]' ><label for='price'>Price</label></div>";
-    removeBox="<div class='input-field col s4'><a class='remove_button' ><img src='remove-icon.png'/></a></div><div class='clearfix'></div>";
-    for(i = 0; i < choices.length; i = i + 1) {
-        selectHTML += "<option value='" + choices[i] + "'>" + choices_names[i] + "</option>";
-    }
-    selectHTML += "</select></div>";
-    newDiv.innerHTML = selectHTML+ " &nbsp;" +newTextBox +" "+ removeBox;
-    document.getElementById(divName).appendChild(newDiv);
-}
-
-$(document).ready(function() {
-    $(dynamicInput).on("click",".remove_button", function(e){ //user click on remove text
-        e.preventDefault();
-        $(this).parent().parent().remove();
-    })
-});
-
-</script>
 
 <script type="text/javascript">
 $(document).ready(function() {

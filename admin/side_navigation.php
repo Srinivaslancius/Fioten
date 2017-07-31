@@ -29,7 +29,7 @@
 
                     <li class="no-padding <?php if($page_name == 'dashboard.php') { echo "active"; } ?>"><a class="waves-effect waves-grey active" href="dashboard.php"><i class="material-icons">dashboard</i>Dashboard</a></li>
                     <li class="no-padding <?php if($page_name == 'site_settings.php') { echo "active"; } ?>"><a class="waves-effect waves-grey active" href="site_settings.php"><i class="material-icons">settings</i>Site Settings</a></li>
-                    <li class="no-padding <?php if($page_name == 'web_menus.php') { echo "active"; } ?>"><a class="waves-effect waves-grey active" href="web_menus.php"><i class="material-icons">open_with</i>Menu</a></li>
+                    <!-- <li class="no-padding <?php if($page_name == 'web_menus.php') { echo "active"; } ?>"><a class="waves-effect waves-grey active" href="web_menus.php"><i class="material-icons">open_with</i>Menu</a></li> -->
                     <li class="no-padding ">
                         <a class="collapsible-header waves-effect waves-grey <?php if($page_name == 'admin_users.php' || $page_name == 'users.php') { echo "active"; } ?>"><i class="material-icons">apps</i>Users <i class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
                         <div class="collapsible-body">

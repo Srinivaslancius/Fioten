@@ -9,19 +9,19 @@ if (!isset($_POST['submit']))  {
     //echo "<pre>"; print_r($_POST); die;
     //Save data into database
     $product_name = $_POST['product_name'];
-    $category_id = $_POST['category_id'];
-    $price = $_POST['price'];
-    $special_price = $_POST['special_price'];
-    $discount_percentage = $_POST['discount_percentage'];
-    $weight_type_id = $_POST['weight_type_id'];
+    $category_id = $_POST['category_id'];    
+    $deal_start_date = $_POST['deal_start_date'];
+    $deal_end_date = $_POST['deal_end_date'];
+    $quantity = $_POST['quantity'];
+    $minimum_order_quantity = $_POST['minimum_order_quantity'];
     $key_features = $_POST['key_features'];
     $product_info = $_POST['product_info'];
-    $about = $_POST['about'];
+    $specifications = $_POST['specifications'];
     $availability_id = $_POST['availability_id'];
     $status = $_POST['status'];
     //save product images into product_images table    
     
-    $sql1 = "UPDATE products SET product_name = '$product_name',category_id ='$category_id' , price = '$price', special_price ='$special_price',discount_percentage = '$discount_percentage',weight_type_id = '$weight_type_id',key_features = '$key_features',product_info = '$product_info',about = '$about',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
+    $sql1 = "UPDATE products SET product_name = '$product_name',category_id ='$category_id' , deal_start_date = '$deal_start_date', deal_end_date ='$deal_end_date',quantity = '$quantity',minimum_order_quantity = '$minimum_order_quantity',key_features = '$key_features',product_info = '$product_info',specifications = '$specifications',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
     
     if ($conn->query($sql1) === TRUE) {
     echo "Record updated successfully";
@@ -53,7 +53,7 @@ if (!isset($_POST['submit']))  {
 <main class="mn-inner">
     <div class="row">
         <div class="col s12">
-            <div class="page-title">Banners</div>
+            <div class="page-title">Products</div>
         </div>
         <div class="col s12 m12 l2"></div>
         <div class="col s12 m12 l8">
@@ -62,11 +62,7 @@ if (!isset($_POST['submit']))  {
                     <div class="row">
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
-                                <?php $getProductsData = getAllDataWhere('products', 'id', $_GET['pid']); $getAllProductsData = $getProductsData->fetch_assoc(); ?>
-                                <div class="input-field col s12">
-                                    <input id="product_name" type="text" class="validate" name="product_name" required value="<?php echo $getAllProductsData['product_name']; ?>">
-                                    <label for="product_name">Product Name</label>
-                                </div>
+                                <?php $getProductsData = getAllDataWhere('products', 'id', $_GET['pid']); $getAllProductsData = $getProductsData->fetch_assoc(); ?>                                
                                
                                 <?php
                                     $getCategories = getAllDataCheckActive('categories',0);
@@ -82,31 +78,54 @@ if (!isset($_POST['submit']))  {
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="price" type="text" class="validate" name="price" required value="<?php echo $getAllProductsData['price']; ?>">
-                                    <label for="price">Price</label>
+                                    <input id="product_name" type="text" class="validate" name="product_name" required value="<?php echo $getAllProductsData['product_name']; ?>">
+                                    <label for="product_name">Product Name</label>
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="special_price" type="text" class="validate" name="special_price" required value="<?php echo $getAllProductsData['special_price']; ?>">
-                                    <label for="special_price">Special Price</label>
+                                    <input id="product_price" type="text" class="validate" name="product_price" required value="<?php echo $getAllProductsData['product_price']; ?>">
+                                    <label for="price">Product Price</label>
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="discount_percentage" type="text" class="validate" name="discount_percentage" required value="<?php echo $getAllProductsData['discount_percentage']; ?>">
-                                    <label for="discount_percentage">Discount Percentage</label>
+                                    <select name="offer_type" required>
+                                        <option value="0" <?php echo $getAllProductsData['offer_type']; ?>></option>
+                                        <option value="1" <?php echo $getAllProductsData['offer_type']; ?>>Price</option>
+                                    </select>
                                 </div>
 
-                                <?php                                                                 
-                                    $getWeights = getAllDataCheckActive('product_weights',0);
-                                ?>
+                                <div class="input-field col s12 show_price" style="display:none">
+                                   <input id="discount_price" type="text" class="validate" name="discount_price" required value="<?php echo $getAllProductsData['discount_price']; ?>">
+                                   <label for="discount_price" class="price_change_text">Discount Price</label>
+                                </div>
 
+                                <div id="clickview"></div>
                                 <div class="input-field col s12">
-                                    <select name="weight_type_id" required>
-                                        <option value="">Select Weighy Type</option>
-                                        <?php while($row = $getWeights->fetch_assoc()) {  ?>
-                                        <option value="<?php echo $row['id']; ?>" <?php if($row['id'] == $getAllProductsData['weight_type_id']) { echo "Selected=Selected"; }?> ><?php echo $row['weight_type']; ?></option>
-                                        <?php } ?>                                      
-                                    </select> 
+                                   <input id="selling_price" readonly type="text" class="validate" name="selling_price" required value="<?php echo $getAllProductsData['selling_price']; ?>">
+                                   <label for="selling_price">Selling Price</label>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col s12">
+                                        <label for="deal_start_date">Deal Start date</label>
+                                        <input id="deal_start_date" name="deal_start_date" type="text" class="datepicker" equired value="<?php echo $getAllProductsData['deal_start_date']; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col s12">
+                                        <label for="deal_end_date">Deal End date</label>
+                                        <input id="deal_end_date" name="deal_end_date" type="text" class="datepicker" required value="<?php echo $getAllProductsData['deal_end_date']; ?>">
+                                    </div>
+                                </div>
+
+                                <div class="input-field col s6">
+                                    <input id="quantity" type="text" class="validate" name="quantity" required value="<?php echo $getAllProductsData['quantity']; ?>">
+                                    <label for="quantity">Quantity</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="minimum_order_quantity" type="text" class="validate" name="minimum_order_quantity" required value="<?php echo $getAllProductsData['minimum_order_quantity']; ?>">
+                                    <label for="minimum_order_quantity">Minimum Order Quantity</label>
                                 </div>
 
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">Key Features</label>
@@ -126,7 +145,7 @@ if (!isset($_POST['submit']))  {
                                 <label for="name" class="col-lg-3 col-sm-3 control-label">About</label>
                                 <div class="input-field col s12">
                                     <div class="col-lg-9">
-                                        <textarea name="about" required id="about"><?php echo $getAllProductsData['about']; ?></textarea>
+                                        <textarea name="specifications" required id="specifications"><?php echo $getAllProductsData['specifications']; ?></textarea>
                                     </div>
                                 </div>
 
@@ -155,13 +174,15 @@ if (!isset($_POST['submit']))  {
                                     </div>
                                 </div>
 
-                                <div class="input-field col s12">
-                                    <select name="status" required>
-                                        <option value="" disabled selected>Choose your status</option>
-                                        <option value="0" <?php if($getAllProductsData['status'] == 0) { echo "Selected"; }?>>Active</option>
-                                        <option value="1" <?php if($getAllProductsData['status'] == 1) { echo "Selected"; }?>>In Active</option>                                        
-                                    </select>                                    
-                                </div>                                
+                                <?php $getStatus = getAllData('user_status'); ?>
+                                    <div class="input-field col s12">
+                                        <select name="status" required >
+                                            <option value="" >Choose your Status</option> 
+                                            <?php while($row = $getStatus->fetch_assoc()) {  ?>
+                                                <option <?php if($row['id'] == $getAllProductsData['status']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['status']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>                                
                                 
                                 <div class="input-field col s12">
                                     <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn teal">

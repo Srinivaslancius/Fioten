@@ -34,7 +34,8 @@ if (!isset($_POST['submit']))  {
         move_uploaded_file($file_tmp, $file_destination);        
         $sql = "INSERT INTO product_images ( `product_id`,`product_image`) VALUES ('$last_id','$product_images1')";
         $result = $conn->query($sql);
-    }    
+    }
+    
     if( $result1 == 1){
     echo "<script>alert('Data Updated Successfully');window.location.href='products.php';</script>";
     } else {
@@ -150,13 +151,15 @@ if (!isset($_POST['submit']))  {
 
                                 </div>
 
-                                <div class="input-field col s12">
-                                    <select name="status" required>
-                                        <option value="" disabled selected>Choose your status</option>
-                                        <option value="0">Active</option>
-                                        <option value="1">In Active</option>
-                                    </select>
-                                </div>
+                                <?php $getStatus = getAllData('user_status'); ?>
+                                    <div class="input-field col s12">
+                                        <select name="status" required>
+                                            <option value="">Select Status</option>
+                                            <?php while($row = $getStatus->fetch_assoc()) {  ?>
+                                                <option value="<?php echo $row['id']; ?>"><?php echo $row['status']; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
 
                                 <div class="input-field col s12">
                                     <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn teal">

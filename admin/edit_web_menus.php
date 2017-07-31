@@ -42,8 +42,8 @@ $id = $_GET['uid'];
                                         <option value="" disabled selected>Choose your status</option>
                                         <option value="0" <?php if($getWebMenus1['status'] == 0) { echo "Selected"; }?>>Active</option>
                                         <option value="1" <?php if($getWebMenus1['status'] == 1) { echo "Selected"; }?>>In Active</option>                                       
-                                    </select>                                    
-                                </div>                            
+                                    </select>
+                                </div>
                                 
                                 <div class="input-field col s12">
                                     <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn teal">

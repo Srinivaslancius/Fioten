@@ -103,8 +103,8 @@ $id = $_GET['uid'];
                                             <option value="" >Choose your Status</option> 
                                             <?php while($row = $getStatus->fetch_assoc()) {  ?>
                                                 <option <?php if($row['id'] == $getUsers1['status']) { echo "Selected"; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['status']; ?></option>
-                                            <?php } ?>                                
-                                        </select>                                    
+                                            <?php } ?>
+                                        </select>
                                     </div>
 
                                     </div>

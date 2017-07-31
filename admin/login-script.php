@@ -2,7 +2,7 @@
 error_reporting(0);
 include_once('includes/config.php');
 include_once('includes/functions.php');
-session_start();
+//session_start();
 
 if($_SERVER["REQUEST_METHOD"]=="POST") {
 

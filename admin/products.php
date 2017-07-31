@@ -15,7 +15,7 @@
                                     <thead>
                                         <tr>
                                             <th>Product Name</th>
-                                            <th>Price</th>
+                                            <th>Product Price</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
@@ -24,8 +24,8 @@
                                         <?php while ($row = $getData->fetch_assoc()) { ?>
                                         <tr>
                                             <td><?php echo $row['product_name'];?></td>
-                                            <td><?php echo $row['price'];?></td>
-                                            <td><?php echo $row['status'];?></td>
+                                            <td><?php echo $row['product_price'];?></td>
+                                            <td><?php if ($row['status']==0) { echo "Active" ;} else{ echo "In Active" ;}?></td>
                                             <td><a href="edit_products.php?pid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">pageview</i></a><a href="#"><i class="material-icons dp48">delete</i></a></td>
                                             <div id="myModal_<?php echo $row['id']; ?>" class="modal fade" >
                                             <div class="modal-dialog" Style="margin-top:10%;">
@@ -35,7 +35,7 @@
                                                     </div>
                                                     <div class="modal-body" >
                                                         <h5 class="modal-title-set"><b>Name :</b><?php echo $row['product_name'];?></h5>
-                                                        <h5 class="modal-title-set"><b>Price :</b><?php echo strip_tags($row['price']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Price :</b><?php echo strip_tags($row['product_price']);?></h5>
                                                    </div>
                                                     <div class="modal-footer" >
                                                           <button type="button" class="btn" data-dismiss="modal" style="background-color:#f00; color:#fff">Close</button>
@@ -53,3 +53,13 @@
                 </div>
             </main>
          <?php include_once 'footer.php'; ?>
+         <!-- model pop-up Script for all pages with bootstrap js -->        
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(".click_view").click(function(){
+                    var modalId = $(this).attr('data-modalId');
+                    $("#myModal_"+modalId).modal('show');  
+                });
+            });
+        </script>

@@ -9,7 +9,11 @@ if (!isset($_POST['submit']))  {
     //echo "<pre>"; print_r($_POST); die;
     //Save data into database
     $product_name = $_POST['product_name'];
-    $category_id = $_POST['category_id'];    
+    $category_id = $_POST['category_id'];
+    $product_price = $_POST['product_price'];
+    $price_type = $_POST['price_type'];
+    $offer_price = $_POST['offer_price'];
+    $selling_price = $_POST['selling_price'];
     $deal_start_date = $_POST['deal_start_date'];
     $deal_end_date = $_POST['deal_end_date'];
     $quantity = $_POST['quantity'];
@@ -19,9 +23,11 @@ if (!isset($_POST['submit']))  {
     $specifications = $_POST['specifications'];
     $availability_id = $_POST['availability_id'];
     $status = $_POST['status'];
+    $created_at = date("Y-m-d h:i:s");
+    $created_by = $_SESSION['admin_user_id'];
     //save product images into product_images table    
     
-    $sql1 = "UPDATE products SET product_name = '$product_name',category_id ='$category_id' , deal_start_date = '$deal_start_date', deal_end_date ='$deal_end_date',quantity = '$quantity',minimum_order_quantity = '$minimum_order_quantity',key_features = '$key_features',product_info = '$product_info',specifications = '$specifications',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
+    $sql1 = "UPDATE products SET product_name = '$product_name',category_id ='$category_id',product_price ='$product_price',price_type ='$price_type',offer_price ='$offer_price',selling_price ='$selling_price', deal_start_date = '$deal_start_date', deal_end_date ='$deal_end_date',quantity = '$quantity',minimum_order_quantity = '$minimum_order_quantity',key_features = '$key_features',product_info = '$product_info',specifications = '$specifications',availability_id = '$availability_id',status = '$status' WHERE id = '$id'"; 
     
     if ($conn->query($sql1) === TRUE) {
     echo "Record updated successfully";
@@ -88,21 +94,21 @@ if (!isset($_POST['submit']))  {
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <select name="offer_type" required>
-                                        <option value="0" <?php echo $getAllProductsData['offer_type']; ?>></option>
-                                        <option value="1" <?php echo $getAllProductsData['offer_type']; ?>>Price</option>
-                                    </select>
+                                    <select name="price_type" id="price_type" required class="price_type">
+                                        <option value="">Price Type</option>
+                                        <option value="1" <?php if($getAllProductsData['price_type'] == 1) { echo "Selected=Selected"; }?>>Price</option>
+                                        <option value="2" <?php if($getAllProductsData['price_type'] == 2) { echo "Selected=Selected"; }?>>Percentage</option>
+                                    </select> 
                                 </div>
 
                                 <div class="input-field col s12 show_price" style="display:none">
-                                   <input id="discount_price" type="text" class="validate" name="discount_price" required value="<?php echo $getAllProductsData['discount_price']; ?>">
-                                   <label for="discount_price" class="price_change_text">Discount Price</label>
+                                   <input id="offer_price" type="text" class="validate" name="offer_price" required value="<?php echo $getAllProductsData['offer_price']; ?>">
+                                   <label for="offer_price" class="price_change_text">Offer Price</label>
                                 </div>
 
                                 <div id="clickview"></div>
                                 <div class="input-field col s12">
-                                   <input id="selling_price" readonly type="text" class="validate" name="selling_price" required value="<?php echo $getAllProductsData['selling_price']; ?>">
-                                   <label for="selling_price">Selling Price</label>
+                                   <input id="selling_price" readonly type="text" class="validate" name="selling_price" required value="<?php echo $getAllProductsData['selling_price']; ?>" placeholder="Selling Price">                                   
                                 </div>
 
                                 <div class="row">
@@ -225,7 +231,42 @@ $(function(){
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
-    
+   
+    //Change price type starts here
+    $("#price_type").change(function () {        
+        if ($(this).val() == 1) {
+            $(".show_price").show();
+            $('.price_change_text').html('Enter Discount Price');
+        } else if($(this).val() == 2) {
+            $(".show_price").show();
+            $('.price_change_text').html('Enter Offer Percentage');
+        } else {
+            $(".show_price").hide();
+        }
+        $('#offer_price, #selling_price').val('');
+    });
+    //End
+    //Check validation for prodcut price empty or not and calaculate selling price
+    $('#offer_price').keyup(function() {
+        if($('#product_price').val()==''){
+            alert("Please Enter Product Price");
+            $('#offer_price').val('');
+            return false;
+        } else if($('#price_type').val() == 1) {
+            calcPrice = ($('#product_price').val() - $('#offer_price').val());
+        } else if($('#price_type').val() == 2) {
+            calcPrice = $('#product_price').val() - ( ($('#product_price').val()/100) * $('#offer_price').val());
+        }
+        discountPrice = calcPrice.toFixed(2);
+        $('#selling_price').val(discountPrice);
+        if(parseInt($('#offer_price').val()) > parseInt($('#product_price').val())) {
+            alert("Please Enter Discount value less than Product Price");
+            $('#selling_price').val('');
+        }
+    });
+    //End
+
+    //Add multi images for products
     var max_fields      = 5; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID

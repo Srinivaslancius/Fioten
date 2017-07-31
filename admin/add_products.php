@@ -7,7 +7,11 @@ if (!isset($_POST['submit']))  {
 } else  {
     //Save data into database
     $product_name = $_POST['product_name'];
-    $category_id = $_POST['category_id'];    
+    $category_id = $_POST['category_id'];
+    $product_price = $_POST['product_price'];
+    $price_type = $_POST['price_type'];
+    $offer_price = $_POST['offer_price'];
+    $selling_price = $_POST['selling_price'];
     $deal_start_date = $_POST['deal_start_date'];
     $deal_end_date = $_POST['deal_end_date'];
     $quantity = $_POST['quantity'];
@@ -21,7 +25,7 @@ if (!isset($_POST['submit']))  {
     $created_by = $_SESSION['admin_user_id'];
     //save product images into product_images table    
     
-    $sql1 = "INSERT INTO products (`product_name`,`category_id`, `deal_start_date`, `deal_end_date`, `quantity`, `minimum_order_quantity`, `key_features`,`product_info`,`specifications`,`availability_id`,`status`,`created_by`,`created_at`) VALUES ('$product_name','$category_id', '$deal_start_date', '$deal_end_date', '$quantity', '$minimum_order_quantity', '$key_features','$product_info','$specifications','$availability_id','$status','$created_by','$created_at')";
+    $sql1 = "INSERT INTO products (`product_name`,`category_id`,`product_price`,`price_type`,`offer_price`,`selling_price`, `deal_start_date`, `deal_end_date`, `quantity`, `minimum_order_quantity`, `key_features`,`product_info`,`specifications`,`availability_id`,`status`,`created_by`,`created_at`) VALUES ('$product_name','$category_id','$product_price','$price_type','$offer_price','$selling_price', '$deal_start_date', '$deal_end_date', '$quantity', '$minimum_order_quantity', '$key_features','$product_info','$specifications','$availability_id','$status','$created_by','$created_at')";
     $result1 = $conn->query($sql1);
     $last_id = $conn->insert_id;
 
@@ -51,13 +55,13 @@ if (!isset($_POST['submit']))  {
         <div class="col s12 m12 l2"></div>
         <div class="col s12 m12 l8">
             <div class="card">
-                <div class="card-content">                                
+                <div class="card-content">
                     <div class="row">
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
                                
                                 <?php
-                                    $getCategories = getAllDataCheckActive('categories',0);                             
+                                    $getCategories = getAllDataCheckActive('categories',0);
                                     $getWeights = getAllDataCheckActive('product_weights',0);
                                 ?>
                                 <div class="input-field col s12">
@@ -66,7 +70,7 @@ if (!isset($_POST['submit']))  {
                                         <?php while($row = $getCategories->fetch_assoc()) {  ?>
                                             <option value="<?php echo $row['id']; ?>"><?php echo $row['category_name']; ?></option>
                                         <?php } ?>
-                                    </select> 
+                                    </select>
                                 </div>
                                 <div class="input-field col s12">
                                     <input id="product_name" type="text" class="validate" name="product_name" required>
@@ -78,15 +82,15 @@ if (!isset($_POST['submit']))  {
                                    <label for="product_price">Product Price</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <select name="offer_type" id="offer_type" required class="offer_type">
+                                    <select name="price_type" id="price_type" required class="price_type">
                                         <option value="">Select Price Type</option>
                                         <option value="1">Price</option>
                                         <option value="2">Percentage</option>
                                     </select>
                                 </div>
                                 <div class="input-field col s12 show_price" style="display:none">
-                                   <input id="discount_price" type="text" class="validate" name="discount_price" onkeypress="return isNumberKey(event)" required>
-                                   <label for="discount_price" class="price_change_text">Discount Price</label>
+                                   <input id="offer_price" type="text" class="validate" name="offer_price" onkeypress="return isNumberKey(event)" required>
+                                   <label for="offer_price" class="price_change_text">Discount Price</label>
                                 </div>
                                 <div id="clickview"></div>
                                 <div class="input-field col s12">
@@ -117,17 +121,17 @@ if (!isset($_POST['submit']))  {
                                 <div class="input-field col s12">
                                     <span for="keyfet" class="col-lg-3 col-sm-3 control-label">Key Features</span> <br /><br />
                                     <div class="col-lg-9">
-                                        <textarea id="key_features" name="key_features" required></textarea>                                        
+                                        <textarea id="key_features" name="key_features" required></textarea>
                                     </div>
                                 </div>
                                         
                                 <div class="input-field col s12">
                                         <span for="name" class="col-lg-3 col-sm-3 control-label">Product Info</span> <br /><br />
                                         <div class="col-lg-9">
-                                            <textarea name="product_info" required id="product_info"></textarea>                                        
+                                            <textarea name="product_info" required id="product_info"></textarea>
                                         </div>
-                                </div>  
-                                
+                                </div>
+
                                 <div class="input-field col s12">
                                         <span for="name" class="col-lg-3 col-sm-3 control-label">Specifications</span> <br /><br />
                                         <div class="col-lg-9">
@@ -139,16 +143,15 @@ if (!isset($_POST['submit']))  {
                                     <select name="availability_id" required>
                                         <option value="" disabled selected>Avalability</option>
                                         <option value="0">In Stock</option>
-                                        <option value="1">Out Of Stock</option>                                        
-                                    </select> 
+                                        <option value="1">Out Of Stock</option>
+                                    </select>
                                 </div>
 
                                 <div class="input-field col s12">
                                     Product Images : <br /><br />
-                                    <div class="input_fields_wrap">                                        
+                                    <div class="input_fields_wrap">
                                         <div><input type="file" name="product_images[]" requird> <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
                                     </div>
-
                                 </div>
 
                                 <?php $getStatus = getAllData('user_status'); ?>
@@ -184,40 +187,40 @@ if (!isset($_POST['submit']))  {
 $(document).ready(function() {
 
     //Change price type starts here
-    $("#offer_type").change(function () {
+    $("#price_type").change(function () {
         if ($(this).val() == 1) {
-            $(".show_price").show();            
-            $('.price_change_text').html('Enter Discount Price');            
+            $(".show_price").show();
+            $('.price_change_text').html('Enter Discount Price');
         } else if($(this).val() == 2) {
-            $(".show_price").show();           
-            $('.price_change_text').html('Enter Offer Percentage');            
+            $(".show_price").show();
+            $('.price_change_text').html('Enter Offer Percentage');
         } else {
             $(".show_price").hide();
         }
-        $('#discount_price, #selling_price').val('');
+        $('#offer_price, #selling_price').val('');
     });
     //End
     //Check validation for prodcut price empty or not and calaculate selling price
-    $('#discount_price').keyup(function() {
+    $('#offer_price').keyup(function() {
         if($('#product_price').val()==''){
             alert("Please Enter Product Price");
-            $('#discount_price').val('');
+            $('#offer_price').val('');
             return false;
-        } else if($('#offer_type').val() == 1) {
-            calcPrice = ($('#product_price').val() - $('#discount_price').val());                        
-        } else if($('#offer_type').val() == 2) {
-            calcPrice = $('#product_price').val() - ( ($('#product_price').val()/100) * $('#discount_price').val() );           
+        } else if($('#price_type').val() == 1) {
+            calcPrice = ($('#product_price').val() - $('#offer_price').val());
+        } else if($('#price_type').val() == 2) {
+            calcPrice = $('#product_price').val() - ( ($('#product_price').val()/100) * $('#offer_price').val());
         }
         discountPrice = calcPrice.toFixed(2);
         $('#selling_price').val(discountPrice);
-        if(parseInt($('#discount_price').val()) > parseInt($('#product_price').val())) {
+        if(parseInt($('#offer_price').val()) > parseInt($('#product_price').val())) {
             alert("Please Enter Discount value less than Product Price");
             $('#selling_price').val('');
         }
     });
     //End
 
-    //Add multi images for products    
+    //Add multi images for products
     var max_fields      = 5; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID
@@ -243,5 +246,5 @@ $(document).ready(function() {
         if (charCode > 31 && (charCode < 48 || charCode > 57))
             return false;
         return true;
-    } 
+    }
 </script>

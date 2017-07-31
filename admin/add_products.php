@@ -1,43 +1,29 @@
 <?php include_once 'main_header.php'; ?>
            
 <?php include_once 'side_navigation.php';?>
-<?php  
+<?php 
 if (!isset($_POST['submit']))  {
             echo "";
 } else  {
     //Save data into database
     $product_name = $_POST['product_name'];
-    $category_id = $_POST['category_id'];
-    // $price = $_POST['price'];
-    // $special_price = $_POST['special_price'];
-    // $selling_price = $_POST['selling_price'];
-    //$discount_percentage = $_POST['discount_percentage'];
-    //$weight_type_id = $_POST['weight_type_id'];
+    $category_id = $_POST['category_id'];    
     $deal_start_date = $_POST['deal_start_date'];
     $deal_end_date = $_POST['deal_end_date'];
     $quantity = $_POST['quantity'];
     $minimum_order_quantity = $_POST['minimum_order_quantity'];
     $key_features = $_POST['key_features'];
     $product_info = $_POST['product_info'];
-    $about = $_POST['about'];
+    $specifications = $_POST['specifications'];
     $availability_id = $_POST['availability_id'];
     $status = $_POST['status'];
     $created_at = date("Y-m-d h:i:s");
     $created_by = $_SESSION['admin_user_id'];
     //save product images into product_images table    
     
-     $sql1 = "INSERT INTO products (`product_name`,`category_id`, `deal_start_date`, `deal_end_date`, `quantity`, `minimum_order_quantity`, `key_features`,`product_info`,`about`,`availability_id`,`status`,`created_by`,`created_at`) VALUES ('$product_name','$category_id', '$deal_start_date', '$deal_end_date', '$quantity', '$minimum_order_quantity', '$key_features','$product_info','$about','$availability_id','$status','$created_by','$created_at')";
-     $result1 = $conn->query($sql1);
-     $last_id = $conn->insert_id;
-
-    $product_weights = $_REQUEST['weight_type_id'];
-    foreach($product_weights as $key=>$value){
-
-        $product_weights1 = $_REQUEST['weight_type_id'][$key];
-        $price = $_REQUEST['price'][$key];      
-        $sql = "INSERT INTO product_weight_prices ( `product_id`,`weight_type_id`,`price`) VALUES ('$last_id','$product_weights1','$price')";
-        $result = $conn->query($sql);
-    }
+    $sql1 = "INSERT INTO products (`product_name`,`category_id`, `deal_start_date`, `deal_end_date`, `quantity`, `minimum_order_quantity`, `key_features`,`product_info`,`specifications`,`availability_id`,`status`,`created_by`,`created_at`) VALUES ('$product_name','$category_id', '$deal_start_date', '$deal_end_date', '$quantity', '$minimum_order_quantity', '$key_features','$product_info','$specifications','$availability_id','$status','$created_by','$created_at')";
+    $result1 = $conn->query($sql1);
+    $last_id = $conn->insert_id;
 
     $product_images = $_FILES['product_images']['name'];
     foreach($product_images as $key=>$value){
@@ -48,9 +34,8 @@ if (!isset($_POST['submit']))  {
         move_uploaded_file($file_tmp, $file_destination);        
         $sql = "INSERT INTO product_images ( `product_id`,`product_image`) VALUES ('$last_id','$product_images1')";
         $result = $conn->query($sql);
-    }
-     
-     if( $result1 == 1){
+    }    
+    if( $result1 == 1){
     echo "<script>alert('Data Updated Successfully');window.location.href='products.php';</script>";
     } else {
        echo "<script>alert('Data Updation Failed');window.location.href='products.php';</script>";
@@ -88,24 +73,35 @@ if (!isset($_POST['submit']))  {
                                 </div>
                                 
                                 <div class="input-field col s12">
-                                   <input id="product_price" type="text" class="validate" name="product_price" required>
+                                   <input id="product_price" type="text" class="validate" name="product_price" onkeypress="return isNumberKey(event)" required>
                                    <label for="product_price">Product Price</label>
                                 </div>
-                              
                                 <div class="input-field col s12">
-                                   <input id="selling_price" readonly type="text" class="validate" name="selling_price[]" required>
+                                    <select name="offer_type" id="offer_type" required class="offer_type">
+                                        <option value="">Select Price Type</option>
+                                        <option value="1">Price</option>
+                                        <option value="2">Percentage</option>
+                                    </select>
+                                </div>
+                                <div class="input-field col s12 show_price" style="display:none">
+                                   <input id="discount_price" type="text" class="validate" name="discount_price" onkeypress="return isNumberKey(event)" required>
+                                   <label for="discount_price" class="price_change_text">Discount Price</label>
+                                </div>
+                                <div id="clickview"></div>
+                                <div class="input-field col s12">
+                                   <input id="selling_price" readonly type="text" class="validate" name="selling_price" required>
                                    <label for="selling_price">Selling Price</label>
                                 </div>
                                 <div class="row">
                                     <div class="col s12">
                                         <label for="deal_start_date">Deal Start date</label>
-                                        <input id="deal_start_date" type="text" class="datepicker">
+                                        <input id="deal_start_date" name="deal_start_date" type="text" class="datepicker">
                                     </div>
                                 </div>
                                 <div class="row">
                                         <div class="col s12">
                                             <label for="deal_end_date">Deal End date</label>
-                                            <input id="deal_end_date" type="text" class="datepicker">
+                                            <input id="deal_end_date" name="deal_end_date" type="text" class="datepicker">
                                         </div>
                                     </div>
                                 <div class="input-field col s6">
@@ -132,9 +128,9 @@ if (!isset($_POST['submit']))  {
                                 </div>  
                                 
                                 <div class="input-field col s12">
-                                        <span for="name" class="col-lg-3 col-sm-3 control-label">About</span> <br /><br />
+                                        <span for="name" class="col-lg-3 col-sm-3 control-label">Specifications</span> <br /><br />
                                         <div class="col-lg-9">
-                                            <textarea name="about" required id="about"></textarea>
+                                            <textarea name="specifications" required id="specifications"></textarea>
                                         </div>
                                 </div>
                                     
@@ -158,10 +154,10 @@ if (!isset($_POST['submit']))  {
                                     <select name="status" required>
                                         <option value="" disabled selected>Choose your status</option>
                                         <option value="0">Active</option>
-                                        <option value="1">In Active</option>                                        
-                                    </select>                                    
-                                </div>                                
-                                
+                                        <option value="1">In Active</option>
+                                    </select>
+                                </div>
+
                                 <div class="input-field col s12">
                                     <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn teal">
                                 </div>
@@ -177,11 +173,48 @@ if (!isset($_POST['submit']))  {
     </div>
 </main>
 
+
+
 <?php include_once('ck_editor.php'); include_once 'footer.php'; ?>
 
 <script type="text/javascript">
 $(document).ready(function() {
-    
+
+    //Change price type starts here
+    $("#offer_type").change(function () {
+        if ($(this).val() == 1) {
+            $(".show_price").show();            
+            $('.price_change_text').html('Enter Discount Price');            
+        } else if($(this).val() == 2) {
+            $(".show_price").show();           
+            $('.price_change_text').html('Enter Offer Percentage');            
+        } else {
+            $(".show_price").hide();
+        }
+        $('#discount_price, #selling_price').val('');
+    });
+    //End
+    //Check validation for prodcut price empty or not and calaculate selling price
+    $('#discount_price').keyup(function() {
+        if($('#product_price').val()==''){
+            alert("Please Enter Product Price");
+            $('#discount_price').val('');
+            return false;
+        } else if($('#offer_type').val() == 1) {
+            calcPrice = ($('#product_price').val() - $('#discount_price').val());                        
+        } else if($('#offer_type').val() == 2) {
+            calcPrice = $('#product_price').val() - ( ($('#product_price').val()/100) * $('#discount_price').val() );           
+        }
+        discountPrice = calcPrice.toFixed(2);
+        $('#selling_price').val(discountPrice);
+        if(parseInt($('#discount_price').val()) > parseInt($('#product_price').val())) {
+            alert("Please Enter Discount value less than Product Price");
+            $('#selling_price').val('');
+        }
+    });
+    //End
+
+    //Add multi images for products    
     var max_fields      = 5; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID
@@ -199,4 +232,13 @@ $(document).ready(function() {
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 });
+
+//Only allowed numbers
+//How to make HTML input tag only accept numerical values?
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    } 
 </script>

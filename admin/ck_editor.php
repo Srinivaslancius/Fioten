@@ -4,7 +4,7 @@
 <script>
 	CKEDITOR.replace( 'key_features' );	
 	CKEDITOR.replace( 'product_info' );	
-	CKEDITOR.replace( 'about' );	
+	CKEDITOR.replace( 'specifications' );	
 </script>
 <style type="text/css">
 	.cke_top, .cke_contents, .cke_bottom {

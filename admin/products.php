@@ -26,7 +26,7 @@
                                             <td><?php echo $row['product_name'];?></td>
                                             <td><?php echo $row['product_price'];?></td>
                                             <td><?php if ($row['status']==0) { echo "Active" ;} else{ echo "In Active" ;}?></td>
-                                            <td><a href="edit_products.php?pid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">pageview</i></a><a href="#"><i class="material-icons dp48">delete</i></a></td>
+                                            <td><a href="edit_products.php?pid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">visibility</i></a>
                                             <div id="myModal_<?php echo $row['id']; ?>" class="modal fade" >
                                             <div class="modal-dialog" Style="margin-top:10%;">
                                                 <div class="modal-content">
@@ -35,7 +35,16 @@
                                                     </div>
                                                     <div class="modal-body" >
                                                         <h5 class="modal-title-set"><b>Name :</b><?php echo $row['product_name'];?></h5>
-                                                        <h5 class="modal-title-set"><b>Price :</b><?php echo strip_tags($row['product_price']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Product Price :</b><?php echo strip_tags($row['product_price']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Offer Price :</b><?php echo strip_tags($row['offer_price']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Selling Price :</b><?php echo strip_tags($row['selling_price']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Starting Date :</b><?php echo strip_tags($row['deal_start_date']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Ending Date :</b><?php echo strip_tags($row['deal_end_date']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Quantity:</b><?php echo strip_tags($row['quantity']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Minimum Order Quantity :</b><?php echo strip_tags($row['minimum_order_quantity']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Key Features :</b><?php echo strip_tags($row['key_features']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Product Info :</b><?php echo strip_tags($row['product_info']);?></h5>
+                                                        <h5 class="modal-title-set"><b>Specifications :</b><?php echo strip_tags($row['specifications']);?></h5>
                                                    </div>
                                                     <div class="modal-footer" >
                                                           <button type="button" class="btn" data-dismiss="modal" style="background-color:#f00; color:#fff">Close</button>

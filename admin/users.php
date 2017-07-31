@@ -80,7 +80,7 @@
                                             <td><?php $country =  getIndividualDetails($row['user_city_id'],'lkp_cities','id'); echo $country['city_name']?></td>
                                             <td><?php echo $row['user_address'];?></td>
                                             <td><?php $getCategoryName = getIndividualDetails($row['status'],'user_status','id'); echo $getCategoryName['status'];?></td>
-                                            <td><a href="edit_users.php?uid=<?php echo $row['id'];?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">pageview</i></a><a href="#"><i class="material-icons dp48">delete</i></a></td>
+                                            <td><a href="edit_users.php?uid=<?php echo $row['id'];?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">visibility</i></a><a href="#"><i class="material-icons dp48">delete</i></a></td>
                                             <div id="myModal_<?php echo $row['id']; ?>" class="modal fade" >
                                             <div class="modal-dialog" Style="margin-top:10%;">
                                                 <div class="modal-content">

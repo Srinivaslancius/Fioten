@@ -1,4 +1,5 @@
 <?php
+session_start();
 date_default_timezone_set("Asia/Kolkata");
 
 $setcon = 2;
@@ -8,7 +9,7 @@ if($setcon == 1) {
 	$password = "capital@123";
 	$dbname = "capitalsecure_latest";
 } else {
-	$servername = "192.168.0.101";	
+	$servername = "192.168.0.103";	
 	$username = "root";
 	$password = "root";
 	$dbname = "fioten";

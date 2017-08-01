@@ -2,6 +2,7 @@
            
 <?php include_once 'side_navigation.php';?>
 <?php  
+error_reporting(0);
 if (!isset($_POST['submit']))  {
             echo "";
         } else  { 
@@ -34,15 +35,15 @@ if (!isset($_POST['submit']))  {
                                     
                                     <div class="input-field col s6">
                                         <input id="admin_name" type="text" class="validate" name="admin_name" required>
-                                        <label for="admin_name">Admin Name</label>
+                                        <label for="admin_name">Name</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="admin_email" type="email" class="validate" name="admin_email" required>
-                                        <label for="admin_email">Admin Email</label>
+                                        <label for="admin_email">Email</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="admin_password" type="password" class="validate" name="admin_password" required>
-                                        <label for="admin_password">Admin Password</label>
+                                        <label for="admin_password">Password</label>
                                     </div>
                                     <?php $getStatus = getAllData('user_status'); ?>
                                     <div class="input-field col s12">

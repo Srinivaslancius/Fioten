@@ -41,19 +41,19 @@ if (!isset($_POST['submit']))  {
                                     
                                     <div class="input-field col s6">
                                         <input id="user_name" type="text" class="validate" name="user_name" required>
-                                        <label for="user_name">User Name</label>
+                                        <label for="user_name">Name</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="user_email" type="email" class="validate" name="user_email" required>
-                                        <label for="user_email">User Email</label>
+                                        <label for="user_email">Email</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="user_mobile" type="text" class="validate" name="user_mobile" required>
-                                        <label for="user_mobile">User Mobile</label>
+                                        <input id="user_mobile" type="text" class="validate" name="user_mobile" maxlength="10"  pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" required>
+                                        <label for="user_mobile">Mobile</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="user_password" type="password" class="validate" name="user_password" required>
-                                        <label for="user_password">User Password</label>
+                                        <label for="user_password">Password</label>
                                     </div>
                                     <?php $getCountries = getAllDataCheckActive('lkp_countries',0); ?>
                                     <div class="input-field col s6">
@@ -81,7 +81,7 @@ if (!isset($_POST['submit']))  {
                                     </div>
                                     <div class="input-field col s12">
                                         <textarea id="user_address" class="materialize-textarea" name="user_address" required></textarea>
-                                        <label for="user_address">User Address</label>
+                                        <label for="user_address">Address</label>
                                     </div>
                                     <?php $getStatus = getAllData('user_status'); ?>
                                     <div class="input-field col s12">
@@ -142,5 +142,11 @@ function getLocations(val) {
         $("#user_location_id").html(data);
     }
     });
+}
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
 }
 </script>

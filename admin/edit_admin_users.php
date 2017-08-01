@@ -37,15 +37,15 @@ $id = $_GET['uid'];
                                 <?php $getUsers = getAllDataWhere('admin_users', 'id', $id); $getUsers1 = $getUsers->fetch_assoc(); ?>                                    
                                     <div class="input-field col s6">
                                         <input id="admin_name" type="text" class="validate" name="admin_name" required value="<?php echo $getUsers1['admin_name'];?>">
-                                        <label for="admin_name">Admin Name</label>
+                                        <label for="admin_name">Name</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="admin_email" type="email" class="validate" name="admin_email" required value="<?php echo $getUsers1['admin_email'];?>">
-                                        <label for="admin_email">Admin Email</label>
+                                        <label for="admin_email">Email</label>
                                     </div>
                                     <div class="input-field col s6">
                                         <input id="admin_password" type="password" class="validate" name="admin_password" required value="<?php echo $getUsers1['admin_password'];?>">
-                                        <label for="admin_password">User Pssword</label>
+                                        <label for="admin_password">Password</label>
                                     </div>
                                     <?php $getStatus = getAllData('user_status'); ?>
                                     <div class="input-field col s12">

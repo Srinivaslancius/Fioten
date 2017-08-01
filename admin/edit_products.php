@@ -89,7 +89,7 @@ if (!isset($_POST['submit']))  {
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="product_price" type="text" class="validate" name="product_price" required value="<?php echo $getAllProductsData['product_price']; ?>">
+                                    <input id="product_price" type="text" class="validate" name="product_price" onkeypress="return isNumberKey(event)"  required value="<?php echo $getAllProductsData['product_price']; ?>">
                                     <label for="price">Product Price</label>
                                 </div>
 
@@ -102,7 +102,7 @@ if (!isset($_POST['submit']))  {
                                 </div>
 
                                 <div class="input-field col s12 show_price" style="display:none">
-                                   <input id="offer_price" type="text" class="validate" name="offer_price" required value="<?php echo $getAllProductsData['offer_price']; ?>">
+                                   <input id="offer_price" type="text" class="validate" name="offer_price" onkeypress="return isNumberKey(event)"  required value="<?php echo $getAllProductsData['offer_price']; ?>">
                                    <label for="offer_price" class="price_change_text">Offer Price</label>
                                 </div>
 
@@ -284,4 +284,13 @@ $(document).ready(function() {
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 });
+
+//Only allowed numbers
+//How to make HTML input tag only accept numerical values?
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
 </script>

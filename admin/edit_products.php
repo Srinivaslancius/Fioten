@@ -102,7 +102,7 @@ if (!isset($_POST['submit']))  {
                                 </div>
 
                                 <div class="input-field col s12 show_price" style="display:none">
-                                   <input id="offer_price" type="text" class="validate" name="offer_price" onkeypress="return isNumberKey(event)"  required value="<?php echo $getAllProductsData['offer_price']; ?>">
+                                   <input id="offer_price" type="text" class="validate" name="offer_price" onkeypress="return isNumberKey(event)" required value="<?php echo $getAllProductsData['offer_price']; ?>">
                                    <label for="offer_price" class="price_change_text">Offer Price</label>
                                 </div>
 
@@ -126,11 +126,11 @@ if (!isset($_POST['submit']))  {
                                 </div>
 
                                 <div class="input-field col s6">
-                                    <input id="quantity" type="text" class="validate" name="quantity" required value="<?php echo $getAllProductsData['quantity']; ?>">
+                                    <input id="quantity" type="text" class="validate" name="quantity" onkeypress="return isNumberKey(event)" required value="<?php echo $getAllProductsData['quantity']; ?>">
                                     <label for="quantity">Quantity</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="minimum_order_quantity" type="text" class="validate" name="minimum_order_quantity" required value="<?php echo $getAllProductsData['minimum_order_quantity']; ?>">
+                                    <input id="minimum_order_quantity" type="text" class="validate" name="minimum_order_quantity" onkeypress="return isNumberKey(event)" required value="<?php echo $getAllProductsData['minimum_order_quantity']; ?>">
                                     <label for="minimum_order_quantity">Minimum Order Quantity</label>
                                 </div>
 
@@ -283,6 +283,16 @@ $(document).ready(function() {
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
+    //End date should be greater than Start date
+    $("#deal_end_date").change(function () {
+        var startDate = document.getElementById("deal_start_date").value;
+        var endDate = document.getElementById("deal_end_date").value;
+     
+        if ((Date.parse(endDate) <= Date.parse(startDate))) {
+            alert("End date should be greater than Start date");
+            document.getElementById("deal_end_date").value = "";
+        }
+    });
 });
 
 //Only allowed numbers

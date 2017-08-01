@@ -110,11 +110,11 @@ if (!isset($_POST['submit']))  {
                                         </div>
                                     </div>
                                 <div class="input-field col s6">
-                                    <input id="quantity" type="text" class="validate" name="quantity" required>
+                                    <input id="quantity" type="text" class="validate" name="quantity" onkeypress="return isNumberKey(event)" required>
                                     <label for="quantity">Quantity</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="minimum_order_quantity" type="text" class="validate" name="minimum_order_quantity" required>
+                                    <input id="minimum_order_quantity" type="text" class="validate" onkeypress="return isNumberKey(event)" name="minimum_order_quantity" required>
                                     <label for="minimum_order_quantity">Minimum Order Quantity</label>
                                 </div>
                                 
@@ -237,6 +237,20 @@ $(document).ready(function() {
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
+    //End date should be greater than Start date
+    $("#deal_end_date").change(function () {
+        var startDate = document.getElementById("deal_start_date").value;
+        var endDate = document.getElementById("deal_end_date").value;
+     
+        if ((Date.parse(endDate) <= Date.parse(startDate))) {
+            alert("End date should be greater than Start date");
+            document.getElementById("deal_end_date").value = "";
+        }
+    });
+   //Minimum order quantity should be less than quantity
+   if(parseInt($('#minimum_order_quantity').val()) > parseInt($('#quantity').val())) {
+        alert("");
+    }
 });
 
 //Only allowed numbers

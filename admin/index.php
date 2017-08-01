@@ -40,7 +40,7 @@
                                            <form class="col s12" autocomplete="off" method="post" action="login-script.php">
                                               
                                                <div class="input-field col s12">
-                                                   <input id="email" type="email" class="validate" required name="admin_email">
+                                                   <input id="email" autofocus="autofocus" type="email" class="validate" required name="admin_email">
                                                    <label for="email">Email</label>
                                                </div>
                                                <div class="input-field col s12">

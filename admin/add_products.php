@@ -150,7 +150,7 @@ if (!isset($_POST['submit']))  {
                                 <div class="input-field col s12">
                                     Product Images : <br /><br />
                                     <div class="input_fields_wrap">
-                                        <div><input type="file" name="product_images[]" requird> <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
+                                        <div><input type="file" name="product_images[]" required> <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
                                     </div>
                                 </div>
 
@@ -230,7 +230,7 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="file" name="product_images[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(wrapper).append('<div><input type="file" required name="product_images[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
         }
     });
    

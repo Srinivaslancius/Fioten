@@ -177,7 +177,7 @@ if (!isset($_POST['submit']))  {
                                     Product Images : <br /><br />                                    
                                     <div class="input_fields_wrap">                                        
                                         <div>
-                                        <?php if(count($getImages) > 1){ ?>
+                                        <?php if($getImages->num_rows > 0){ ?>
                                             <input type="file" name="product_images[]" >
                                         <?php } else { ?>
                                             <input type="file" name="product_images[]" required >

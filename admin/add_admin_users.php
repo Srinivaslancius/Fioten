@@ -34,7 +34,7 @@ if (!isset($_POST['submit']))  {
                                 <div class="row">
                                     
                                     <div class="input-field col s6">
-                                        <input id="admin_name" type="text" class="validate" name="admin_name" required>
+                                        <input id="admin_name" autofocus="autofocus" type="text" class="validate" name="admin_name" required>
                                         <label for="admin_name">Name</label>
                                     </div>
                                     <div class="input-field col s6">

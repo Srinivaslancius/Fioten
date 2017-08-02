@@ -31,7 +31,7 @@
                             <div class="row">
 
                                 <div class="input-field col s12">
-                                    <input id="title" type="text" class="validate" name="menu_name" required>
+                                    <input id="title" autofocus="autofocus" type="text" class="validate" name="menu_name" required>
                                     <label for="title">Menu name </label>
                                 </div>        
                                 <div class="input-field col s12">

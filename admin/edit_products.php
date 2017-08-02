@@ -286,10 +286,14 @@ $(document).ready(function() {
     //End date should be greater than Start date
     $("#deal_end_date").change(function () {
         var startDate = document.getElementById("deal_start_date").value;
+        if ($('#deal_start_date').val()=='') {
+        alert("Please Enter Deal Start date");
+        document.getElementById("deal_end_date").value = ""
+    };
         var endDate = document.getElementById("deal_end_date").value;
      
         if ((Date.parse(endDate) <= Date.parse(startDate))) {
-            alert("End date should be greater than Start date");
+            alert("Deal End date should be greater than Deal Start date");
             document.getElementById("deal_end_date").value = "";
         }
     });

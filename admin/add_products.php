@@ -110,11 +110,11 @@ if (!isset($_POST['submit']))  {
                                         </div>
                                     </div>
                                 <div class="input-field col s6">
-                                    <input id="quantity" type="text" class="validate" name="quantity" onkeypress="return isNumberKey(event)" required>
+                                    <input id="quantity" type="text" class="validate order_qnty" name="quantity" onkeypress="return isNumberKey(event)" required>
                                     <label for="quantity">Quantity</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="minimum_order_quantity" type="text" class="validate" onkeypress="return isNumberKey(event)" name="minimum_order_quantity" required>
+                                    <input id="minimum_order_quantity" type="text" class="validate min_order_qnty" onkeypress="return isNumberKey(event)" name="minimum_order_quantity" required>
                                     <label for="minimum_order_quantity">Minimum Order Quantity</label>
                                 </div>
                                 
@@ -248,9 +248,19 @@ $(document).ready(function() {
         }
     });
    //Minimum order quantity should be less than quantity
-   if(parseInt($('#minimum_order_quantity').val()) > parseInt($('#quantity').val())) {
-        alert("");
-    }
+   $("#minimum_order_quantity").keyup(function () {
+        if($('#quantity').val()==''){
+            alert("Please Enter Quantity");
+            $('#minimum_order_quantity, #quantity').val('');
+        } else {
+            if(parseInt($('#minimum_order_quantity').val()) > parseInt($('#quantity').val())) {
+                alert("The quantity value must be larger than the minimum quantity");
+                $('#minimum_order_quantity').val('');
+                return false;
+            }
+        }        
+   });
+   
 });
 
 //Only allowed numbers

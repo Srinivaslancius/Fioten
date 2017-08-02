@@ -241,7 +241,7 @@ $(document).ready(function() {
         var startDate = document.getElementById("deal_start_date").value;
         if ($('#deal_start_date').val()=='') {
         alert("Please Enter Deal Start date");
-        document.getElementById("deal_end_date").value = ""
+        document.getElementById("deal_end_date").value = "";
     };
         var endDate = document.getElementById("deal_end_date").value;
      
@@ -262,7 +262,7 @@ $(document).ready(function() {
                 $('#minimum_order_quantity').val('');
                 return false;
             }
-        }        
+        }
    });
    
 });

@@ -287,9 +287,9 @@ $(document).ready(function() {
     $("#deal_end_date").change(function () {
         var startDate = document.getElementById("deal_start_date").value;
         if ($('#deal_start_date').val()=='') {
-        alert("Please Enter Deal Start date");
-        document.getElementById("deal_end_date").value = ""
-    };
+            alert("Please Enter Deal Start date");
+            document.getElementById("deal_end_date").value = "";
+        };
         var endDate = document.getElementById("deal_end_date").value;
      
         if ((Date.parse(endDate) <= Date.parse(startDate))) {
@@ -297,6 +297,20 @@ $(document).ready(function() {
             document.getElementById("deal_end_date").value = "";
         }
     });
+
+   //Minimum order quantity should be less than quantity
+    $("#minimum_order_quantity").keyup(function () {
+        if($('#quantity').val()==''){
+            alert("Please Enter Quantity");
+            $('#minimum_order_quantity, #quantity').val('');
+        } else {
+            if(parseInt($('#minimum_order_quantity').val()) > parseInt($('#quantity').val())) {
+                alert("The quantity value must be larger than the minimum quantity");
+                $('#minimum_order_quantity').val('');
+                return false;
+            }
+        }
+   });
 });
 
 //Only allowed numbers

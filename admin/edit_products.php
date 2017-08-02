@@ -177,13 +177,11 @@ if (!isset($_POST['submit']))  {
                                     Product Images : <br /><br />
                                     <div class="input_fields_wrap">
                                         <div>
-                                        <?php if(count($getImages)){ ?>
-                                            <input type="file" name="product_images[]" >
+                                        <?php if($getImages->num_rows > 0){ ?>
+                                            <input type="file" name="product_images[]" accept="image/*">
                                         <?php } else { ?>
-                                            <input type="file" name="product_images[]" required >
+                                            <input type="file" name="product_images[]" accept="image/*" required >
                                         <?php } ?>
-                                             
-
                                         <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
                                     </div>
                                 </div>

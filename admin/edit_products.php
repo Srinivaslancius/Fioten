@@ -174,10 +174,10 @@ if (!isset($_POST['submit']))  {
                                 </div>
 
                                 <div class="input-field col s12">
-                                    Product Images : <br /><br />                                    
-                                    <div class="input_fields_wrap">                                        
+                                    Product Images : <br /><br />
+                                    <div class="input_fields_wrap">
                                         <div>
-                                        <?php if($getImages->num_rows > 0){ ?>
+                                        <?php if(count($getImages)){ ?>
                                             <input type="file" name="product_images[]" >
                                         <?php } else { ?>
                                             <input type="file" name="product_images[]" required >

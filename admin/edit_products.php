@@ -218,20 +218,25 @@ $(function(){
     $(document).on('click','.ajax_img_del',function(){
         var del_id= $(this).attr('id');
         var $ele = $(this).parent().parent();
+        var r = confirm("are you sure to delete");
+        if(r == true){
         $.ajax({
             type:'POST',
             url:'delete_image.php',
             data:{'del_id':del_id},
-            success: function(data){               
+            success: function(data){              
                  if(data=="YES"){
-                    alert("Deleted Scuccesfully");
-                    location.reload();
+                    
+                   location.reload();
                  }else{
                     alert("Deleted Failed");  
-                 }
+                }
              }
 
-            });
+           });
+         } else{
+            location.reload();
+         }
         });
 });
 </script>

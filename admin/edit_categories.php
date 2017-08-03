@@ -73,7 +73,7 @@ $id = $_GET['uid'];
                                 </div> 
                                 
                                 <div class="input-field col s6">
-                                   Image : <input type="file" name="category_image" id="category_image">                                     
+                                   Image : <input type="file" name="category_image" id="category_image" accept="image/*">                                     
                                 </div>
 
                                 <div class="input-field col s12">

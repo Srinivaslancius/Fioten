@@ -106,9 +106,16 @@ if (!isset($_POST['submit']))  {
                                    <label for="offer_price" class="price_change_text">Offer Price</label>
                                 </div>
 
+
                                 <div id="clickview"></div>
                                 <div class="input-field col s12">
-                                   <input id="selling_price" readonly type="text" class="validate" name="selling_price" required value="<?php echo $getAllProductsData['selling_price']; ?>" placeholder="Selling Price">                                   
+                                   <input id="offer_price" readonly type="text" class="validate" name="offer_price" required value="<?php echo $getAllProductsData['offer_price']; ?>">
+                                   <label for="offer_price">Price type</label>
+                                </div>
+
+                                <div id="clickview"></div>
+                                <div class="input-field col s12">
+                                   <input id="selling_price" readonly type="text" class="validate" name="selling_price" required value="<?php echo $getAllProductsData['selling_price']; ?>" placeholder="Selling Price">
                                 </div>
 
                                 <div class="row">
@@ -218,20 +225,25 @@ $(function(){
     $(document).on('click','.ajax_img_del',function(){
         var del_id= $(this).attr('id');
         var $ele = $(this).parent().parent();
+        var r = confirm("are you sure to delete");
+        if(r == true){
         $.ajax({
             type:'POST',
             url:'delete_image.php',
             data:{'del_id':del_id},
-            success: function(data){               
+            success: function(data){              
                  if(data=="YES"){
-                    alert("Deleted Scuccesfully");
-                    location.reload();
+                    
+                   location.reload();
                  }else{
                     alert("Deleted Failed");  
-                 }
+                }
              }
 
-            });
+           });
+         } else{
+            location.reload();
+         }
         });
 });
 </script>

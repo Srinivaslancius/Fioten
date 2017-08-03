@@ -24,7 +24,7 @@
     <body class="signup-page">
         
         <div class="mn-content fixed-sidebar">
-            <header class="mn-header navbar-fixed">
+            <header class="mn-header navbar-fixed" style="margin-top:70px">
                 <?php //include_once'header.php';?>
             </header>
 

@@ -53,7 +53,7 @@ $id = $_GET['uid'];
                                         <label for="user_mobile">Mobile</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="user_password" type="password" class="validate" name="user_password" required value="<?php echo $getUsers1['user_password'];?>">
+                                        <input id="user_password" type="password" class="validate" name="user_password" required value="<?php echo decryptPassword($getUsers1['user_password']);?>">
                                         <label for="user_password">Password</label>
                                     </div>
                                     <?php $getCountries = getAllDataCheckActive('lkp_countries',0); ?>

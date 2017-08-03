@@ -44,7 +44,7 @@ $id = $_GET['uid'];
                                         <label for="admin_email">Email</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="admin_password" type="password" class="validate" name="admin_password" required value="<?php echo $getUsers1['admin_password'];?>">
+                                        <input id="admin_password" type="password" class="validate" name="admin_password" required value="<?php echo decryptPassword($getUsers1['admin_password']);?>">
                                         <label for="admin_password">Password</label>
                                     </div>
                                     <?php $getStatus = getAllData('user_status'); ?>

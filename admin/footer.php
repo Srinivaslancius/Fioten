@@ -9,8 +9,16 @@
         <script src="assets/js/alpha.min.js"></script>
         <script src="assets/js/pages/table-data.js"></script>
         <script src="assets/js/pages/form_elements.js"></script>
-        
-       
+        <!-- model pop-up Script for all pages with bootstrap js -->
+        <script src="assets/js/bootstrap.min.js"></script>
+       <script type="text/javascript">
+            $(document).ready(function(){
+                $(".click_view").click(function(){
+                    var modalId = $(this).attr('data-modalId');
+                    $("#myModal_"+modalId).modal('show');  
+                });                  
+            });
+        </script>
         
     </body>
 </html>

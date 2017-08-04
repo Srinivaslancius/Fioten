@@ -266,12 +266,20 @@ $(document).ready(function() {
             calcPrice = ($('#product_price').val() - $('#offer_price').val());
         } else if($('#price_type').val() == 2) {
             calcPrice = $('#product_price').val() - ( ($('#product_price').val()/100) * $('#offer_price').val());
+            if (parseInt($('#offer_price').val())>99) {
+                alert("Please enter the percentage less than 100 ");
+                $('#selling_price').val('');
+                $('#selling_price').val('');
+                $('#offer_price').val('');
+                return false;
+            };
         }
         discountPrice = calcPrice.toFixed(2);
         $('#selling_price').val(discountPrice);
         if(parseInt($('#offer_price').val()) > parseInt($('#product_price').val())) {
             alert("Please Enter Discount value less than Product Price");
             $('#selling_price').val('');
+            $('#offer_price').val('');
         }
     });
     //End

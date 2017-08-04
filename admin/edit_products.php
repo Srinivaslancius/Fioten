@@ -168,7 +168,7 @@ if (!isset($_POST['submit']))  {
                                     $sql = "SELECT id,product_image FROM product_images where product_id = $id";
                                     $getImages= $conn->query($sql);                                                             
                                     while($row=$getImages->fetch_assoc()) {
-                                        echo "<img src= '../uploads/product_images/".$row['product_image']."' width=80px; height=80px;/> <a style='cursor:pointer' class='ajax_img_del' id=".$row['id'].">Delete</a> <br />";
+                                        echo "<img id='output' src= '../uploads/product_images/".$row['product_image']."' width=80px; height=80px;/> <a style='cursor:pointer' class='ajax_img_del' id=".$row['id'].">Delete</a> <br />";
                                     }                               
                                    ?>
                                 </div>
@@ -178,11 +178,11 @@ if (!isset($_POST['submit']))  {
                                     <div class="input_fields_wrap">
                                         <div>
                                         <?php if($getImages->num_rows > 0){ ?>
-                                            <input type="file" name="product_images[]" accept="image/*">
+                                            <input type="file" name="product_images[]" accept="image/*" onchange="loadFile(event)">
                                         <?php } else { ?>
-                                            <input type="file" name="product_images[]" accept="image/*" required >
+                                            <input type="file" name="product_images[]" accept="image/*" onchange="loadFile(event)" required >
                                         <?php } ?>
-                                        <a style="cursor:pointer" class="add_field_button">Add More Fields</a> </div><br/>
+                                        <a style="cursor:pointer" id="add_more" class="add_field_button">Add More Fields</a></div><br/>
                                     </div>
                                 </div>
 
@@ -226,7 +226,6 @@ $(function(){
             data:{'del_id':del_id},
             success: function(data){              
                  if(data=="YES"){
-                    
                    location.reload();
                  }else{
                     alert("Deleted Failed");  
@@ -278,20 +277,27 @@ $(document).ready(function() {
     //End
 
     //Add multi images for products
-    var max_fields      = 5; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
-   
-    var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(wrapper).append('<div><input type="file" required name="product_images[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+   var abc = 0;
+    $('#add_more').click(function () {
+        $(this).before("<div><input type='file' id='file' name='product_images[]' accept='image/*'required><a href='#' class='remove_field'>Remove</a> </div>");
+    });
+    $('body').on('change', '#file', function () {
+        if (this.files && this.files[0])
+        {
+            abc += 1; //increementing global variable by 1
+            var z = abc - 1;
+            var x = $(this).parent().find('#previewimg' + z).remove();
+            $(this).before("<div id='abcd" + abc + "' class='abcd'><img id='previewimg" + abc + "' src='' width='150' height='150'/></div>");
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
         }
     });
-   
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        //image preview
+    function imageIsLoaded(e) {
+        $('#previewimg' + abc).attr('src', e.target.result);
+    };
+    $(this).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
     //End date should be greater than Start date

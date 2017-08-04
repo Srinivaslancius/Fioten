@@ -6,21 +6,15 @@
         } else  {
 
 
-            $title = $_POST['title'];                                    
+            $title = $_POST['title'];
             $fileToUpload = $_FILES["fileToUpload"]["name"];
-            $status = $_POST['status'];                                                    
+            $status = $_POST['status'];
             
             if($fileToUpload!='') {
 
                 $target_dir = "../uploads/banner_images/";
                 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-                // Allow certain file formats
-                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-                && $imageFileType != "gif" ) {
-                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-                    $uploadOk = 0;
-                }
 
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                     $sql = "INSERT INTO banners (`title`, `banner`, `status`) VALUES ('$title', '$fileToUpload','$status')";
@@ -56,7 +50,8 @@
                                 </div>
                                 
                                 <div class="input-field col s6">
-                                   Image : <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" required>                                     
+                                   <img id="output" height="100" width="100"/> 
+                                   <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" onchange="loadFile(event)" required>         
                                 </div>
 
                                 <div class="input-field col s12">

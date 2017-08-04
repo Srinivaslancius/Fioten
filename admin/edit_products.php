@@ -106,13 +106,6 @@ if (!isset($_POST['submit']))  {
                                    <label for="offer_price" class="price_change_text">Offer Price</label>
                                 </div>
 
-
-                                <div id="clickview"></div>
-                                <div class="input-field col s12">
-                                   <input id="offer_price" readonly type="text" class="validate" name="offer_price" required value="<?php echo $getAllProductsData['offer_price']; ?>">
-                                   <label for="offer_price">Price type</label>
-                                </div>
-
                                 <div id="clickview"></div>
                                 <div class="input-field col s12">
                                    <input id="selling_price" readonly type="text" class="validate" name="selling_price" required value="<?php echo $getAllProductsData['selling_price']; ?>" placeholder="Selling Price">

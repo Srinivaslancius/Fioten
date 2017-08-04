@@ -56,7 +56,7 @@ $id = $_GET['bid'];
         <div class="col s12 m12 l2"></div>
         <div class="col s12 m12 l8">
             <div class="card">
-                <div class="card-content">                                
+                <div class="card-content">
                     <div class="row">
                         <form class="col s12" method="post" enctype="multipart/form-data">
                             <div class="row">
@@ -69,12 +69,12 @@ $id = $_GET['bid'];
                                 <div class="form-group">
                                     <label for="name" class="col-lg-3 col-sm-3 control-label"></label>
                                     <div class="col-lg-9">
-                                        <img src="<?php echo $base_url . 'uploads/banner_images/'.$getBanners1['banner'] ?>" height="200" width="200" />
+                                        <img src="<?php echo $base_url . 'uploads/banner_images/'.$getBanners1['banner'] ?>" height="200" width="200" id="output" />
                                     </div>
                                 </div> 
                                 
                                 <div class="input-field col s6">
-                                   Banner : <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">                                     
+                                   Banner : <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" onchange="loadFile(event)">
                                 </div>
 
                                 <div class="input-field col s12">
@@ -82,9 +82,8 @@ $id = $_GET['bid'];
                                         <option value="" disabled selected>Choose your status</option>
                                         <option value="0" <?php if($getBanners1['status'] == 0) { echo "Selected"; }?>>Active</option>
                                         <option value="1" <?php if($getBanners1['status'] == 1) { echo "Selected"; }?>>In Active</option>                                       
-                                    </select>                                    
-                                </div>                            
-                                
+                                    </select>
+                                </div>                                
                                 <div class="input-field col s12">
                                     <input type="submit" name="submit" value="Submit" class="waves-effect waves-light btn teal">
                                 </div>
@@ -100,3 +99,9 @@ $id = $_GET['bid'];
     </div>
 </main>
 <?php include_once 'footer.php'; ?>
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+  };
+</script>

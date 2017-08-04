@@ -68,12 +68,12 @@ $id = $_GET['uid'];
                                 <div class="form-group">
                                     <label for="name" class="col-lg-3 col-sm-3 control-label"></label>
                                     <div class="col-lg-9">
-                                        <img src="<?php echo $base_url . 'uploads/category_images/'.$getCategories1['category_image'] ?>" height="100" width="100"/>
+                                        <img src="<?php echo $base_url . 'uploads/category_images/'.$getCategories1['category_image'] ?>" height="100" width="100" id="output"/>
                                     </div>
                                 </div> 
                                 
                                 <div class="input-field col s6">
-                                   Image : <input type="file" name="category_image" id="category_image" accept="image/*">                                     
+                                   Image : <input type="file" name="category_image" id="category_image" accept="image/*" onchange="loadFile(event)">                                     
                                 </div>
 
                                 <div class="input-field col s12">

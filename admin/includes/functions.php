@@ -18,6 +18,15 @@
         return $result;
     }
 
+    /*Common function with where out where get all data from query */
+    function getAllDataWithActiveRecent($table)
+    {
+        global $conn;
+        $sql="select * from `$table` ORDER BY status, id DESC ";
+        $result = $conn->query($sql);         
+        return $result;
+    }
+
      /*Common function with where and check active status for get all records*/
     function getAllDataCheckActive($table,$status)
     {

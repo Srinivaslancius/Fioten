@@ -149,7 +149,11 @@ if (!isset($_POST['submit']))  {
                                 <div class="input-field col s12">
                                     Product Images : <br /><br />
                                     <div class="input_fields_wrap">
-                                        <div><input type="file" id="file" name="product_images[]" accept="image/*" required> <a style="cursor:pointer" id="add_more" class="add_field_button">Add More Fields</a> </div><br/>
+                                        <div>
+                                            <img id="output" height="100" width="100"/> 
+                                            <input type="file" id="product_images" name="product_images[]" accept="image/*" onchange="loadFile(event)" required> 
+                                            <a style="cursor:pointer" id="add_more" class="add_field_button">Add More Fields</a>
+                                        </div><br/>
                                     </div>
                                 </div>
 
@@ -209,31 +213,44 @@ $(document).ready(function() {
             calcPrice = ($('#product_price').val() - $('#offer_price').val());
         } else if($('#price_type').val() == 2) {
             calcPrice = $('#product_price').val() - ( ($('#product_price').val()/100) * $('#offer_price').val());
+            if (parseInt($('#offer_price').val())>99) {
+                alert("Please enter the percentage less than 100 ");
+                $('#selling_price').val('');
+                $('#offer_price').val('');
+                return false;
+            };
         }
         discountPrice = calcPrice.toFixed(2);
         $('#selling_price').val(discountPrice);
         if(parseInt($('#offer_price').val()) > parseInt($('#product_price').val())) {
             alert("Please Enter Discount value less than Product Price");
             $('#selling_price').val('');
+            $('#offer_price').val('');
         }
     });
     //End
-
     //Add multi images for products
-    var max_fields      = 5; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
-   
-    var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(wrapper).append('<div><input type="file" required name="product_images[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+    var abc = 0;
+    $('#add_more').click(function () {
+        $(this).before("<div><input type='file' id='file' name='product_images[]' accept='image/*'required><a href='#' class='remove_field'>Remove</a> </div>");
+    });
+    $('body').on('change', '#file', function () {
+        if (this.files && this.files[0])
+        {
+            abc += 1; //increementing global variable by 1
+            var z = abc - 1;
+            var x = $(this).parent().find('#previewimg' + z).remove();
+            $(this).before("<div id='abcd" + abc + "' class='abcd'><img id='previewimg" + abc + "' src='' width='150' height='150'/></div>");
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
         }
     });
-   
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        //image preview
+    function imageIsLoaded(e) {
+        $('#previewimg' + abc).attr('src', e.target.result);
+    };
+    $(this).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
     //End date should be greater than Start date

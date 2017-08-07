@@ -72,7 +72,7 @@
                                     <label for="title">Admin Title</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <input id="title" type="text" class="validate" name="email" required value="<?php echo $getSiteSettingsData['email'];?>">
+                                    <input id="title" type="text" class="validate" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required value="<?php echo $getSiteSettingsData['email'];?>">
                                     <label for="title">Email</label>
                                 </div>
                                 <div class="input-field col s12">

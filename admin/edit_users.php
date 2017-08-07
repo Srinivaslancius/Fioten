@@ -45,7 +45,7 @@ $id = $_GET['uid'];
                                         <label for="user_name">Name</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="user_email" type="email" class="validate" name="user_email" required value="<?php echo $getUsers1['user_email'];?>">
+                                        <input id="user_email" type="email" class="validate" name="user_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required value="<?php echo $getUsers1['user_email'];?>">
                                         <label for="user_email">Email</label>
                                     </div>
                                     <div class="input-field col s6">

@@ -40,7 +40,7 @@
                                            <form class="col s12" autocomplete="off" method="post" action="login-script.php">
                                               
                                                <div class="input-field col s12">
-                                                   <input id="email" autofocus="autofocus" type="email" class="validate" required name="admin_email">
+                                                   <input id="email" autofocus="autofocus" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="validate" name="admin_email" required >
                                                    <label for="email">Email</label>
                                                </div>
                                                <div class="input-field col s12">

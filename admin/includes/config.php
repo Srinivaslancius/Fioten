@@ -9,7 +9,11 @@ if($setcon == 1) {
 	$password = "capital@123";
 	$dbname = "capitalsecure_latest";
 } else {
+<<<<<<< HEAD
 	$servername = "192.168.0.102";	
+=======
+	$servername = "192.168.0.106";	
+>>>>>>> 4adc09668940872ce720e48aa21ac1e49701f6ce
 	$username = "root";
 	$password = "root";
 	$dbname = "fioten";

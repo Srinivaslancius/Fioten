@@ -10,7 +10,7 @@
                             <div class="card-content">
                                  <a href="add_users.php" style="float:right">Add User</a>
                                 <span class="card-title">Users</span>
-                                <?php $getData = getAllData('users'); ?>
+                                <?php $getData = getAllDataWithActiveRecent('users'); $i=1; ?>
                                 <?php $sql = "SELECT users.user_country_id, lkp_countries.country_name FROM users LEFT JOIN lkp_countries ON users.user_country_id=lkp_countries.id GROUP BY users.user_country_id";
                                     $result = $conn->query($sql);
 
@@ -62,6 +62,7 @@
                                     <table id="example" class="display responsive-table datatable-example">
                                     <thead>
                                         <tr>
+                                            <th>Id</th>
                                             <th>User Name</th>
                                             <th>Country</th>
                                             <th>State</th>
@@ -74,6 +75,7 @@
                                     <tbody>
                                         <?php while ($row = $getData->fetch_assoc()) { ?>
                                         <tr>
+                                            <td><?php echo $i;?></td>
                                             <td><?php echo $row['user_name'];?></td>
                                             <td><?php $country =  getIndividualDetails($row['user_country_id'],'lkp_countries','id'); echo $country['country_name']?></td>
                                             <td><?php $country =  getIndividualDetails($row['user_state_id'],'lkp_states','id'); echo $country['state_name']?></td>
@@ -107,7 +109,7 @@
 
                                         </tr>
                                          
-                                        <?php } ?>
+                                        <?php $i++; } ?>
                                     </tbody>
                                 </table>
                             </div>

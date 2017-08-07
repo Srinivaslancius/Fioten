@@ -10,10 +10,11 @@
                             <div class="card-content">
                                 <a href="add_admin_users.php" style="float:right">Add Admin User</a>
                                 <span class="card-title">Admin Users</span>
-                                <?php $getData = getAllData('admin_users'); ?>
+                                <?php $getData = getAllDataWithActiveRecent('admin_users'); $i=1; ?>
                                 <table id="example" class="display responsive-table datatable-example">
                                     <thead>
                                         <tr>
+                                            <th>Id</th>
                                             <th>Admin Name</th>
                                             <th>Admin Email </th>
                                             <th>Created Date</th>                                            
@@ -23,6 +24,7 @@
                                     <tbody>
                                         <?php while ($row = $getData->fetch_assoc()) { ?>
                                         <tr>
+                                            <td><?php echo $i;?></td>
                                             <td><?php echo $row['admin_name'];?></td>
                                             <td><?php echo $row['admin_email'];?></td>
                                             <td><?php echo $row['created_at'];?></td>
@@ -45,7 +47,7 @@
                                             </div>
                                         </div>
                                         </tr>               
-                                        <?php } ?>
+                                        <?php $i++; } ?>
                                     </tbody>
                                 </table>
                             </div>

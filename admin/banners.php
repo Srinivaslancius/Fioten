@@ -10,10 +10,11 @@
                             <div class="card-content">
                                 <a href="add_banners.php" style="float:right">Add Banners</a>
                                 <span class="card-title">Banners</span>
-                                <?php $getData = getAllData('banners'); ?>
+                                <?php $getData = getAllDataWithActiveRecent('banners'); $i=1; ?>
                                 <table id="example" class="display responsive-table datatable-example">
                                     <thead>
                                         <tr>
+                                            <th>Id</th>
                                             <th>Banner Title</th>
                                             <th>Banner</th>                                                                  
                                             <th>Actions</th>
@@ -22,6 +23,7 @@
                                     <tbody>
                                         <?php while ($row = $getData->fetch_assoc()) { ?>
                                         <tr>
+                                            <td><?php echo $i;?></td>
                                             <td><?php echo $row['title'];?></td>
                                             <td><img src="<?php echo $base_url . 'uploads/banner_images/'.$row['banner'] ?>" height="100" width="100"/></td>                        
                                             <td><a href="edit_banners.php?bid=<?php echo $row['id']; ?>"><i class="material-icons dp48">edit</i></a><a class="click_view" data-modalId="<?php echo $row['id']?>" href="#"><i class="material-icons dp48">visibility</i></a><a href="delete_banners.php?bid=<?php echo $row['id']; ?>"><i class="material-icons dp48" onclick="return confirm('Are you sure you want to delete?')">delete</i></a></td>
@@ -43,7 +45,7 @@
                                         </div>
 
                                         </tr>               
-                                        <?php } ?>
+                                        <?php $i++; } ?>
                                     </tbody>
                                 </table>
                             </div>

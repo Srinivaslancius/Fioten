@@ -10,10 +10,11 @@
                             <div class="card-content">
                                  <a href="add_content_pages.php" style="float:right">Add Contents</a>
                                 <span class="card-title">Content Pages</span>
-                                <?php $getData = getAllData('content_pages'); ?>
+                                <?php $getData = getAllDataWithActiveRecent('content_pages'); $i=1; ?>
                                 <table id="example" class="display responsive-table datatable-example">
                                     <thead>
                                         <tr>
+                                            <th>Id</th>
                                             <th>Title</th>
                                             <th>Description </th>
                                             <th>Status </th>
@@ -23,6 +24,7 @@
                                     <tbody>
                                         <?php while ($row = $getData->fetch_assoc()) { ?>
                                         <tr>
+                                            <td><?php echo $i;?></td>
                                             <td><?php echo $row['title'];?></td>
                                             <td><?php echo substr(strip_tags($row['description']), 0,150);?></td>
                                             <td><?php if ($row['status']==0) { echo "Active" ;} else{ echo "In Active" ;}?></td>
@@ -44,7 +46,7 @@
                                             </div>
                                         </div>
                                         </tr>               
-                                        <?php } ?>
+                                        <?php $i++; } ?>
                                     </tbody>
                                 </table>
                             </div>

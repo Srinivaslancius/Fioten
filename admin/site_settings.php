@@ -72,23 +72,23 @@
                                     <label for="title">Admin Title</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <input id="title" type="text" class="validate" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required value="<?php echo $getSiteSettingsData['email'];?>">
+                                    <input id="title" type="email" class="validate" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required value="<?php echo $getSiteSettingsData['email'];?>">
                                     <label for="title">Email</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <input id="title" type="text" class="validate" name="fb_link" required value="<?php echo $getSiteSettingsData['fb_link'];?>">
+                                    <input id="title" type="url" class="validate" name="fb_link" required value="<?php echo $getSiteSettingsData['fb_link'];?>">
                                     <label for="title">Facebook link</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <input id="title" type="text" class="validate" name="twitter_link" required value="<?php echo $getSiteSettingsData['twitter_link'];?>">
+                                    <input id="title" type="url" class="validate" name="twitter_link" required value="<?php echo $getSiteSettingsData['twitter_link'];?>">
                                     <label for="title">Twitter Link</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <input id="title" type="text" class="validate" name="gplus_link" required value="<?php echo $getSiteSettingsData['gplus_link'];?>">
+                                    <input id="title" type="url" class="validate" name="gplus_link" required value="<?php echo $getSiteSettingsData['gplus_link'];?>">
                                     <label for="title">Google + Link</label>
                                 </div>
                                 <div class="input-field col s12">
-                                    <input id="title" type="text" class="validate" name="mobile" required value="<?php echo $getSiteSettingsData['mobile'];?>">
+                                    <input id="title" type="text" class="validate" name="mobile" maxlength="10"  pattern="[0-9]{10}" onkeypress="return isNumberKey(event)" required value="<?php echo $getSiteSettingsData['mobile'];?>">
                                     <label for="title">Mobile</label>
                                 </div>
                                 <div class="form-group">
@@ -124,3 +124,11 @@
     </div>
 </main>
 <?php include_once 'footer.php'; ?>
+<script>
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+</script>

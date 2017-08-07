@@ -89,7 +89,7 @@ if (!isset($_POST['submit']))  {
                                 </div>
 
                                 <div class="input-field col s12">
-                                    <input id="product_price" type="text" class="validate" name="product_price" onkeypress="return isNumberKey(event)"  required value="<?php echo $getAllProductsData['product_price']; ?>">
+                                    <input id="product_price" type="text" class="validate" name="product_price" onkeypress="return isNumberKey(event)" required value="<?php echo $getAllProductsData['product_price']; ?>">
                                     <label for="price">Product Price</label>
                                 </div>
 
@@ -180,6 +180,7 @@ if (!isset($_POST['submit']))  {
                                         <?php if($getImages->num_rows > 0){ ?>
                                             <input type="file" name="product_images[]" accept="image/*" onchange="loadFile(event)">
                                         <?php } else { ?>
+                                        <img id="output" width="80" height="80">
                                             <input type="file" name="product_images[]" accept="image/*" onchange="loadFile(event)" required >
                                         <?php } ?>
                                         <a style="cursor:pointer" id="add_more" class="add_field_button">Add More Fields</a></div><br/>
@@ -218,7 +219,7 @@ $(function(){
     $(document).on('click','.ajax_img_del',function(){
         var del_id= $(this).attr('id');
         var $ele = $(this).parent().parent();
-        var r = confirm("are you sure to delete");
+        var r = confirm("Are you sure you want to delete?");
         if(r == true){
         $.ajax({
             type:'POST',

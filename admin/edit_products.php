@@ -243,7 +243,7 @@ $(function(){
 $(document).ready(function() {
    
     //Change price type starts here
-    $("#price_type").change(function () {        
+    $("#price_type").change(function () {     
         if ($(this).val() == 1) {
             $(".show_price").show();
             $('.price_change_text').html('Enter Discount Price');

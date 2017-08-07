@@ -13,7 +13,7 @@ if($setcon == 1) {
 	$username = "root";
 	$password = "root";
 	$dbname = "fioten";
-}
+} 
  
 
 // Create connection

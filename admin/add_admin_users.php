@@ -38,7 +38,7 @@ if (!isset($_POST['submit']))  {
                                         <label for="admin_name">Name</label>
                                     </div>
                                     <div class="input-field col s6">
-                                        <input id="admin_email" type="email" class="validate" name="admin_email" required>
+                                        <input id="admin_email" type="email" class="validate" name="admin_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
                                         <label for="admin_email">Email</label>
                                     </div>
                                     <div class="input-field col s6">

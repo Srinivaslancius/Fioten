@@ -16,13 +16,13 @@ $(document).ready(function() {
     });
     //Filters for country Satate and city
     $('#select-country').on('change', function () {
-        table.columns(1).search( this.value ).draw();
-    } );
-    $('#select-state').on('change', function () {
         table.columns(2).search( this.value ).draw();
     } );
-    $('#select-cities').on('change', function () {
+    $('#select-state').on('change', function () {
         table.columns(3).search( this.value ).draw();
+    } );
+    $('#select-cities').on('change', function () {
+        table.columns(4).search( this.value ).draw();
     } );
     
     $('.dataTables_length select').addClass('browser-default');
@@ -38,5 +38,5 @@ function filterme() {
     return '^' + this.value + '\$';
   }).get().join('|');
   //filter in column 0, with an regex, no smart filtering, no inputbox,not case sensitive
-  otable.fnFilter(types, 5, true, false, false, false);  
+  otable.fnFilter(types, 6, true, false, false, false);  
 }
